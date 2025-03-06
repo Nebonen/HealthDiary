@@ -1,13 +1,218 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Daily Tracker</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+        <!-- Navigation Bar -->
+      <nav class="navbar">
+        <div class="logo">Daily Tracker</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Diary</a></li>
+            <li><a href="src/pages/profile.html">Profile</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="section-title">My Daily Tracker</h1>
+        <div class="two-column">
+
+            <!-- Left Column: Diary Entry Form -->
+            <div class="column">
+                <div class="card">
+                    <h2>New Diary Entry</h2>
+                    <form id="diary-form">
+                        <div class="form-group">
+                            <label for="entry-date">Date</label>
+                            <input type="date" id="entry-date" name="entry-date" required value="">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mood">Mood</label>
+                            <select id="mood" name="mood" required>
+                                <option value="" disabled selected>Select your mood</option>
+                                <option value="great">Great 😁</option>
+                                <option value="good">Good 🙂</option>
+                                <option value="neutral">Neutral 😐</option>
+                                <option value="meh">Meh 😕</option>
+                                <option value="bad">Bad 😞</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="weight" step="0.1" min="0" placeholder="Enter your weight">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sleep">Sleep (hours)</label>
+                            <input type="number" id="sleep" name="sleep" step="0.5" min="0" max="24" placeholder="How many hours did you sleep?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" name="notes" placeholder="Write your thoughts for today..."></textarea>
+                        </div>
+                        
+                        <button type="submit">Save Entry</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Right Column: User Level Tracker -->
+            <div class="column">
+                <div class="card">
+                    <h2>Your Progress</h2>
+                    <div class="level-tracker">
+                        <div class="level-circle">
+                            <div class="inner-circle">
+                                <span class="level-number">7</span>
+                                <span class="level-label">LEVEL</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        
+                        <p class="progress-text">65 / 100 XP to next level</p>
+                        
+                        <div style="margin-top: 2rem; width: 100%;">
+                            <h3 style="margin-bottom: 1rem;">Activity Stats</h3>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">31</div>
+                                    <div style="font-size: 0.8rem; color: var(--medium);">Total Entries</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">7</div>
+                                    <div style="font-size: 0.8rem; color: var(--medium);">Current Streak</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">12</div>
+                                    <div style="font-size: 0.8rem; color: var(--medium);">Best Streak</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="heading-with-link">
+                        <h2>Recent Entries</h2>
+                        <span class="view-all-link" id="open-entries-modal">View All Entries</span>
+                    </div>
+                    <div id="recent-entries">
+                        <div class="entry-item">
+                            <div class="entry-header">
+                                <span class="entry-date">March 5, 2025</span>
+                                <span class="entry-mood">Good 🙂</span>
+                            </div>
+                            <p class="entry-stats">Weight: 68.5 kg | Sleep: 7.5 hrs</p>
+                            <p class="entry-notes">Had a productive day at work. Went for a jog in the evening.</p>
+                        </div>
+                        <div class="entry-item">
+                            <div class="entry-header">
+                                <span class="entry-date">March 4, 2025</span>
+                                <span class="entry-mood">Great 😁</span>
+                            </div>
+                            <p class="entry-stats">Weight: 68.7 kg | Sleep: 8 hrs</p>
+                            <p class="entry-notes">Met with friends for dinner. Feeling energized!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Dialog for All Entries -->
+    <div id="entries-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--medium);">All Diary Entries</h2>
+            <div id="all-entries">
+
+                <!-- Example entries - in a real app this would be populated dynamically -->
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">March 5, 2025</span>
+                        <span class="entry-mood">Good 🙂</span>
+                    </div>
+                    <p class="entry-stats">Weight: 68.5 kg | Sleep: 7.5 hrs</p>
+                    <p class="entry-notes">Had a productive day at work. Went for a jog in the evening.</p>
+                </div>
+                
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">March 4, 2025</span>
+                        <span class="entry-mood">Great 😁</span>
+                    </div>
+                    <p class="entry-stats">Weight: 68.7 kg | Sleep: 8 hrs</p>
+                    <p class="entry-notes">Met with friends for dinner. Feeling energized!</p>
+                </div>
+                
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">March 3, 2025</span>
+                        <span class="entry-mood">Neutral 😐</span>
+                    </div>
+                    <p class="entry-stats">Weight: 68.9 kg | Sleep: 6.5 hrs</p>
+                    <p class="entry-notes">Regular workday. Nothing special to report.</p>
+                </div>
+                
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">March 2, 2025</span>
+                        <span class="entry-mood">Good 🙂</span>
+                    </div>
+                    <p class="entry-stats">Weight: 69.0 kg | Sleep: 7 hrs</p>
+                    <p class="entry-notes">Sunday brunch with family. Started reading a new book.</p>
+                </div>
+                
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">March 1, 2025</span>
+                        <span class="entry-mood">Great 😁</span>
+                    </div>
+                    <p class="entry-stats">Weight: 69.2 kg | Sleep: 8.5 hrs</p>
+                    <p class="entry-notes">Went hiking with friends. The weather was perfect!</p>
+                </div>
+                
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">February 28, 2025</span>
+                        <span class="entry-mood">Meh 😕</span>
+                    </div>
+                    <p class="entry-stats">Weight: 69.5 kg | Sleep: 6 hrs</p>
+                    <p class="entry-notes">Long meeting at work. Feeling a bit stressed about deadlines.</p>
+                </div>
+                
+                <div class="entry-item">
+                    <div class="entry-header">
+                        <span class="entry-date">February 27, 2025</span>
+                        <span class="entry-mood">Good 🙂</span>
+                    </div>
+                    <p class="entry-stats">Weight: 69.3 kg | Sleep: 7.5 hrs</p>
+                    <p class="entry-notes">Started a new project at work. Excited about the challenge!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Daily Tracker. All rights reserved.</p>
+        <p>Track your daily habits and improve your well-being.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
+    <script type="module" src="/src/js/index.js"></script>
   </body>
 </html>
