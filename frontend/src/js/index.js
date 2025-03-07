@@ -1,4 +1,6 @@
 import '../css/index.css';
+import fetchAndDisplayEntries from './entries';
+import fetchAndDisplayUserStats from './user';
 
 const dateToToday = () => {
   // Set today's date as the default value for the date input
@@ -45,6 +47,10 @@ const dialog = () => {
     }
   });
 };
+
+document
+  .getElementById('open-entries-modal')
+  .addEventListener('click', fetchAndDisplayEntries);
 
 dialog();
 dateToToday();

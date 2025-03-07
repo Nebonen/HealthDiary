@@ -7,8 +7,12 @@ CREATE TABLE Users (
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    experience INT DEFAULT 0,
+    total_entries INT DEFAULT 0,
     level INT DEFAULT 1,
+    experience INT DEFAULT 0,
+    experience_to_next_level INT DEFAULT 100,
+    current_streak INT DEFAULT 0,
+    highest_streak INT DEFAULT 0,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     user_level VARCHAR(10) DEFAULT 'regular'
 );
@@ -28,6 +32,7 @@ CREATE TABLE DiaryEntries (
 CREATE TABLE Achievements (
     achievement_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    experience_points INT NOT NULL,
     description VARCHAR(255) NOT NULL,
     requirement VARCHAR(255) NOT NULL
 );
@@ -41,3 +46,6 @@ CREATE TABLE UserAchievements (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
     FOREING KEY (achievement_id) REFERENCES Achievements(achievement_id)
 );
+
+INSERT INTO Users (username, email, password, total_entries, level, experience, experience_to_next_level, current_streak, highest_streak, created_at, user_level) VALUES
+('admin', 'admin@admin.com', 'admin123', 0, 1, 0, 100, 0, 0, NOW(), 'admin');

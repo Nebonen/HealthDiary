@@ -171,11 +171,41 @@ button:hover {
 .progress-fill {
     height: 100%;
     background-color: var(--accent);
-    width: 65%; /* This will be dynamic based on user progress */
+    width: 0%; /* This will be dynamic based on user progress */
 }
 
 .progress-text {
     font-size: 0.9rem;
+    color: var(--medium);
+}
+
+.stats-container {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.stats-heading {
+    margin-bottom: 1rem;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.stat-label {
+    font-size: 0.8rem;
     color: var(--medium);
 }
 
