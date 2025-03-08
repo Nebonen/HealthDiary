@@ -53,3 +53,427 @@ body {
 .nav-links a:hover, .nav-links a.active {
     color: var(--accent);
 }
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-title {
+    color: var(--medium);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent);
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.two-column {
+    display: flex;
+    gap: 2rem;
+}
+
+.column {
+    flex: 1;
+}
+
+/* User profile section */
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.avatar-container {
+    margin-right: 2rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.detail-row {
+    margin-bottom: 0.75rem;
+    display: flex;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: var(--medium);
+    width: 120px;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+.profile-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.secondary-btn {
+    background-color: white;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.secondary-btn:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* Level tracker */
+.level-tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.level-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#4caf50 0%, #8bc34a 15%, #cddc39 30%, #ffeb3b 45%, #ffc107 60%, #ff9800 75%, #ff5722 90%, #f44336 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.inner-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.level-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.level-label {
+    font-size: 0.8rem;
+    color: var(--medium);
+}
+
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent);
+    width: 0%;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: var(--medium);
+}
+
+.stats-container {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.stats-heading {
+    margin-bottom: 1rem;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--medium);
+}
+
+/* Achievements */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.achievement-item {
+    padding: 1rem;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    border-left: 4px solid var(--accent);
+    transition: transform 0.2s;
+}
+
+.achievement-item:hover {
+    transform: translateX(5px);
+}
+
+.achievement-item.locked {
+    border-left: 4px solid #ccc;
+    opacity: 0.7;
+}
+
+.achievement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-name {
+    font-weight: bold;
+}
+
+.achievement-xp {
+    background-color: #f2f2f2;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: var(--accent);
+}
+
+.achievement-description {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-requirement {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.achievement-date {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Chart containers */
+.chart-container {
+    margin-bottom: 2rem;
+    height: 200px;
+    position: relative;
+}
+
+.chart-title {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--medium);
+}
+
+/* Modal Dialog */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 50px auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--medium);
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.close-modal:hover {
+    color: var(--dark);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--medium);
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.auth-btn:hover {
+    background-color: #0097a7;
+}
+
+.error-message {
+    color: #e74c3c;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #fdf0ed;
+    border-radius: 4px;
+    display: none;
+}
+
+.success-message {
+    color: #27ae60;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #edfdf5;
+    border-radius: 4px;
+    display: none;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--medium);
+    color: var(--light);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links {
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: var(--light);
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .two-column {
+        flex-direction: column;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        margin-top: 1rem;
+    }
+    
+    .nav-links li {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    .user-profile {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .avatar-container {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+    }
+    
+    .detail-label {
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+}

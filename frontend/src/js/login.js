@@ -1,6 +1,39 @@
 import '../css/login.css';
 
+// Function to check if user is already logged in
+function checkExistingSession() {
+  const authToken = localStorage.getItem('authToken');
+  if (authToken) {
+    // Validate token
+    fetch('http://localhost:3000/api/auth/validate', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // If token is valid, redirect to home page
+          window.location.href = '/index.html';
+        } else {
+          // If token is invalid, clear it from localStorage
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('userData');
+        }
+      })
+      .catch((error) => {
+        console.error('Token validation error:', error);
+        // Clear invalid token
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+      });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Check for existing session immediately
+  checkExistingSession();
+
   // Tab switching logic
   const tabs = document.querySelectorAll('.auth-tab');
   const forms = document.querySelectorAll('.auth-form');
@@ -46,19 +79,22 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({email, password}),
       });
 
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-
       const data = await response.json();
 
-      // Store the token in localStorage
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store the token and user info in localStorage
       localStorage.setItem('authToken', data.token);
+      localStorage.setItem('userData', JSON.stringify(data.user));
 
       // Redirect to home page
-      window.location.href = 'index.html';
+      window.location.href = '/index.html';
     } catch (error) {
       console.error('Login error:', error);
+      loginError.textContent =
+        error.message || 'Invalid email or password. Please try again.';
       loginError.style.display = 'block';
     }
   });
@@ -71,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   registerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const name = document.getElementById('register-name').value;
+    const username = document.getElementById('register-name').value;
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
     const confirmPassword = document.getElementById(
@@ -96,15 +132,18 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name, email, password}),
+        body: JSON.stringify({username, email, password}),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Registration failed');
+        throw new Error(data.message || 'Registration failed');
       }
 
       // Show success message
+      registerSuccess.textContent =
+        'Account created successfully! You can now login.';
       registerSuccess.style.display = 'block';
 
       // Clear the form
@@ -121,4 +160,32 @@ document.addEventListener('DOMContentLoaded', () => {
       registerError.style.display = 'block';
     }
   });
+
+  // Check if user is already logged in
+  const authToken = localStorage.getItem('authToken');
+  if (authToken) {
+    // Validate token
+    fetch('http://localhost:3000/api/auth/validate', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // If token is valid, redirect to home page
+          window.location.href = '/index.html';
+        } else {
+          // If token is invalid, clear it from localStorage
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('userData');
+        }
+      })
+      .catch((error) => {
+        console.error('Token validation error:', error);
+        // Clear invalid token
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+      });
+  }
 });

@@ -1,6 +1,38 @@
 import '../css/index.css';
-import fetchAndDisplayEntries from './entries';
-import fetchAndDisplayUserStats from './user';
+import {
+  fetchAndDisplayEntries,
+  fetchAndDisplayRecentEntries,
+  setupDiaryForm,
+} from './entries.js';
+import fetchAndDisplayUserStats from './user.js';
+import {checkAuthentication, validateToken} from './authentication.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // Check if user is logged in
+  const isAuthenticated = checkAuthentication();
+
+  if (isAuthenticated) {
+    // Validate the token with the backend
+    const isValid = await validateToken();
+
+    if (isValid) {
+      // Set today's date
+      dateToToday();
+
+      // Setup the diary form
+      setupDiaryForm();
+
+      // Load entries
+      fetchAndDisplayRecentEntries();
+
+      // Update user stats
+      fetchAndDisplayUserStats();
+
+      // Setup the entries modal dialog
+      setupEntriesModal();
+    }
+  }
+});
 
 const dateToToday = () => {
   // Set today's date as the default value for the date input
@@ -16,14 +48,17 @@ const dateToToday = () => {
   document.getElementById('entry-date').value = formattedToday;
 };
 
-const dialog = () => {
+const setupEntriesModal = () => {
   const modal = document.getElementById('entries-modal');
   const openModalBtn = document.getElementById('open-entries-modal');
   const closeModalBtn = document.getElementById('close-modal');
 
+  if (!modal || !openModalBtn || !closeModalBtn) return;
+
   openModalBtn.addEventListener('click', function () {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+    fetchAndDisplayEntries(); // Fetch entries when opening the modal
   });
 
   closeModalBtn.addEventListener('click', function () {
@@ -47,10 +82,3 @@ const dialog = () => {
     }
   });
 };
-
-document
-  .getElementById('open-entries-modal')
-  .addEventListener('click', fetchAndDisplayEntries);
-
-dialog();
-dateToToday();

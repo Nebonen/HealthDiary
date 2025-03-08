@@ -1,21 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-      <!-- Navigation Bar -->
-      <nav class="navbar">
-        <div class="logo">Daily Tracker</div>
-        <ul class="nav-links">
-            <li><a href="/index.html">Home</a></li>
-            <li><a href="#" class="active">Profile</a></li>
-            <li><a href="#" id="logout-btn">Logout</a></li>
-        </ul>
-    </nav>
-    <h1>profiili</h1>
-    <script type="module" src="/src/js/profile.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Daily Tracker - Profile</title>
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo">Daily Tracker</div>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#" class="active">Profile</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="section-title">Your Profile</h1>
+            
+            <div class="two-column">
+                <!-- Left Column: User Information -->
+                <div class="column">
+                    <div class="card">
+                        <h2>Account Information</h2>
+                        <div class="user-profile">
+                            <div class="avatar-container">
+                                <div class="avatar">
+                                    <span id="avatar-initials"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="user-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Username:</span>
+                                    <span id="profile-username" class="detail-value"></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Email:</span>
+                                    <span id="profile-email" class="detail-value"></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Member Since:</span>
+                                    <span id="profile-created" class="detail-value"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-buttons">
+                            <button id="change-password-btn" class="secondary-btn">Change Password</button>
+                            <button id="edit-profile-btn" class="secondary-btn">Edit Profile</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h2>Your Stats</h2>
+                        <div class="level-tracker">
+                            <div class="level-circle">
+                                <div class="inner-circle">
+                                    <span class="level-number"></span>
+                                    <span class="level-label"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            
+                            <p class="progress-text"></p>
+                            
+                            <div class="stats-container">
+                                <h3 class="stats-heading">Activity Stats</h3>
+                                <div class="stats-row">
+                                    <div class="stat-item">
+                                        <div class="stat-value" id="total-entries"></div>
+                                        <div class="stat-label">Total Entries</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value" id="current-streak"></div>
+                                        <div class="stat-label">Current Streak</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value" id="best-streak"></div>
+                                        <div class="stat-label">Best Streak</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Achievements -->
+                <div class="column">
+                    <div class="card">
+                        <h2>Your Achievements</h2>
+                        <div id="achievements-container" class="achievements-list">
+                            <p class="loading">Loading achievements...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="heading-with-link">
+                            <h2>Entry Statistics</h2>
+                        </div>
+                        <div id="entry-stats">
+                            <div class="chart-container">
+                                <canvas id="mood-chart"></canvas>
+                                <div class="chart-title">Mood Distribution</div>
+                            </div>
+                            
+                            <div class="chart-container">
+                                <canvas id="weight-chart"></canvas>
+                                <div class="chart-title">Weight Tracking</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Password Change Modal -->
+        <div id="password-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="close-password-modal">&times;</button>
+                <h2>Change Password</h2>
+                <form id="password-form">
+                    <div class="form-group">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm New Password</label>
+                        <input type="password" id="confirm-password" required minlength="6">
+                    </div>
+                    <button type="submit" class="auth-btn">Update Password</button>
+                    <div id="password-error" class="error-message"></div>
+                    <div id="password-success" class="success-message"></div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 Daily Tracker. All rights reserved.</p>
+            <p>Track your daily habits and improve your well-being.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </footer>
+        
+        <script type="module" src="/src/js/profile.js"></script>
+    </body>
 </html>

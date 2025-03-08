@@ -1,22 +1,28 @@
-// PLACE HOLDER ???
-
 // Authentication handling for main app
-// Add this to your index.js file
 
-// Function to check if user is authenticated
+/**
+ * Check if user is authenticated
+ * @returns {boolean} Authentication status
+ */
 function checkAuthentication() {
   const authToken = localStorage.getItem('authToken');
 
   // If no token is found, redirect to login page
   if (!authToken) {
-    window.location.href = 'login.html';
+    // Only redirect if we're not already on the login page
+    if (!window.location.pathname.includes('login.html')) {
+      window.location.href = '/src/pages/login.html';
+    }
     return false;
   }
 
   return true;
 }
 
-// Function to validate token with backend
+/**
+ * Validate token with backend
+ * @returns {Promise<boolean>} Token validity
+ */
 async function validateToken() {
   try {
     const authToken = localStorage.getItem('authToken');
@@ -35,8 +41,15 @@ async function validateToken() {
     if (!response.ok) {
       // Token is invalid, clear it and redirect to login
       localStorage.removeItem('authToken');
-      window.location.href = 'login.html';
+      localStorage.removeItem('userData');
+      window.location.href = '/src/pages/login.html';
       return false;
+    }
+
+    // Token is valid, refresh user data
+    const userData = await response.json();
+    if (userData && userData.user) {
+      localStorage.setItem('userData', JSON.stringify(userData.user));
     }
 
     return true;
@@ -46,57 +59,70 @@ async function validateToken() {
   }
 }
 
-// Function to handle logout
+/**
+ * Log out the user
+ */
 function logout() {
-  // Clear the authentication token
+  // Clear the authentication token and user data
   localStorage.removeItem('authToken');
+  localStorage.removeItem('userData');
 
   // Redirect to login page
-  window.location.href = 'login.html';
+  window.location.href = '/src/pages/login.html';
 }
 
-// Add authentication headers to all fetch requests to the API
+// Update the fetch override to be more robust
 const originalFetch = window.fetch;
 window.fetch = function (url, options = {}) {
+  // Create a new options object to avoid modifying the original
+  const newOptions = {...options};
+
   // Only add auth header for requests to our API
-  if (url.includes('localhost:3000/api')) {
+  if (typeof url === 'string' && url.includes('localhost:3000/api')) {
     const authToken = localStorage.getItem('authToken');
 
     if (authToken) {
-      options.headers = options.headers || {};
-      options.headers = {
-        ...options.headers,
-        Authorization: `Bearer ${authToken}`,
-      };
+      // Initialize headers if needed
+      newOptions.headers = newOptions.headers || {};
+
+      // Only add Authorization if it's not already present
+      if (
+        !newOptions.headers.Authorization &&
+        !newOptions.headers.authorization
+      ) {
+        newOptions.headers.Authorization = `Bearer ${authToken}`;
+      }
     }
   }
 
-  return originalFetch(url, options);
+  // Call the original fetch with the new options
+  return originalFetch(url, newOptions);
 };
 
 // Run auth check when page loads
 document.addEventListener('DOMContentLoaded', async () => {
+  // Skip auth check if we're on the login page
+  if (window.location.pathname.includes('login.html')) {
+    return;
+  }
+
   // Check if user is logged in
   const isAuthenticated = checkAuthentication();
 
   if (isAuthenticated) {
     // Validate the token with the backend
-    await validateToken();
+    const isValid = await validateToken();
+
+    if (!isValid) {
+      return; // The validateToken function will handle redirection
+    }
 
     // Add logout functionality to any logout buttons
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', logout);
     }
-
-    // Continue with normal page initialization
-    // These function calls should be defined elsewhere in your code
-    if (typeof fetchAndDisplayUserStats === 'function') {
-      fetchAndDisplayUserStats();
-    }
-
-    if (typeof fetchAndDisplayRecentEntries === 'function') {
-      fetchAndDisplayRecentEntries();
-    }
   }
 });
+
+export {checkAuthentication, validateToken, logout};

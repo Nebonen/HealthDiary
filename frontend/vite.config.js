@@ -8,7 +8,8 @@ export default defineConfig({
       input: {
         // List your html files here, e.g:
         main: resolve(__dirname, 'index.html'),
-        home: resolve(__dirname, 'home.html'),
+        login: resolve(__dirname, 'src/pages/login.html'),
+        profile: resolve(__dirname, 'src/pages/profile.html'),
       },
     },
   },

@@ -1,7 +1,8 @@
-// Function to fetch user statistics and update the UI
+/**
+ * Fetch user statistics and update the UI
+ */
 async function fetchAndDisplayUserStats() {
   try {
-    //console.log('Fetching user stats...');
     // Get the UI elements that need to be updated
     const levelNumber = document.querySelector('.level-number');
     const levelLabel = document.querySelector('.level-label');
@@ -20,16 +21,25 @@ async function fetchAndDisplayUserStats() {
     if (currentStreakElement) currentStreakElement.textContent = '...';
     if (bestStreakElement) bestStreakElement.textContent = '...';
 
-    // Fetch user data from the backend
-    const response = await fetch('http://localhost:3000/api/users');
+    // Try to use cached user data first
+    let userData = JSON.parse(localStorage.getItem('userData') || '{}');
 
-    // Check if the request was successful
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    // If we need more detailed stats, fetch from the API
+    if (!userData.total_entries || !userData.current_streak) {
+      // Fetch user data from the backend
+      const response = await fetch('http://localhost:3000/api/users/profile');
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse the JSON response
+      userData = await response.json();
+
+      // Update cached userData
+      localStorage.setItem('userData', JSON.stringify(userData));
     }
-
-    // Parse the JSON response (assuming it returns data for the current user)
-    const userData = await response.json();
 
     // If we have user data, update the UI elements
     if (userData) {
