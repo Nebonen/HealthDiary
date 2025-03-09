@@ -1,4 +1,4 @@
-import * as entryModel from '../models/diaryModel.js';
+import * as entryModel from '../models/entryModel.js';
 import * as userModel from '../models/userModel.js';
 
 /**

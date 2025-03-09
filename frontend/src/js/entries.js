@@ -1,3 +1,5 @@
+import fetchAndDisplayUserStats from './user.js';
+
 // Function to fetch entries from the backend and display them
 async function fetchAndDisplayEntries() {
   try {
@@ -125,45 +127,6 @@ async function fetchAndDisplayEntries() {
   }
 }
 
-// Function to edit an entry
-function editEntry(entryId) {
-  console.log(`Edit entry ${entryId}`);
-  // You would typically fetch the entry details and populate a form
-  // For now just log the action
-}
-
-// Function to delete an entry
-async function deleteEntry(entryId) {
-  if (!confirm('Are you sure you want to delete this entry?')) {
-    return;
-  }
-
-  try {
-    const response = await fetch(
-      `http://localhost:3000/api/entries/${entryId}`,
-      {
-        method: 'DELETE',
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to delete entry: ${response.statusText}`);
-    }
-
-    // Refresh the entries list
-    fetchAndDisplayEntries();
-    // Also refresh recent entries if that function exists
-    if (typeof fetchAndDisplayRecentEntries === 'function') {
-      fetchAndDisplayRecentEntries();
-    }
-
-    alert('Entry deleted successfully');
-  } catch (error) {
-    console.error('Error deleting entry:', error);
-    alert(`Error: ${error.message}`);
-  }
-}
-
 // Function to fetch and display only the 2 most recent entries
 async function fetchAndDisplayRecentEntries() {
   try {
@@ -281,6 +244,141 @@ async function fetchAndDisplayRecentEntries() {
   }
 }
 
+// Function to edit an entry
+async function editEntry(entryId) {
+  try {
+    // Get the form elements
+    const diaryForm = document.getElementById('diary-form');
+    const dateInput = document.getElementById('entry-date');
+    const moodInput = document.getElementById('mood');
+    const weightInput = document.getElementById('weight');
+    const sleepInput = document.getElementById('sleep');
+    const notesInput = document.getElementById('notes');
+    const submitButton = diaryForm.querySelector('button[type="submit"]');
+
+    // Change the form submission button text
+    if (submitButton) submitButton.textContent = 'Update Entry';
+
+    // Fetch the entry details from the backend
+    const response = await fetch(
+      `http://localhost:3000/api/entries/${entryId}`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch entry details: ${response.statusText}`);
+    }
+
+    const entry = await response.json();
+
+    // Populate the form with the entry details
+    dateInput.value = new Date(entry.date).toISOString().split('T')[0];
+    moodInput.value = entry.mood || '';
+    weightInput.value = entry.weight || '';
+    sleepInput.value = entry.sleep || '';
+    notesInput.value = entry.notes || '';
+
+    // Store the entry ID in the form for submission handling
+    diaryForm.dataset.editEntryId = entryId;
+
+    // Modify form submission handler to handle updates
+    diaryForm.onsubmit = async function (event) {
+      event.preventDefault();
+
+      // Disable form submission button to prevent double-clicks
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        // Send PUT request to update the entry
+        const updateResponse = await fetch(
+          `http://localhost:3000/api/entries/${entryId}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              date: dateInput.value,
+              mood: moodInput.value,
+              weight: weightInput.value || null,
+              sleep: sleepInput.value || null,
+              notes: notesInput.value || null,
+            }),
+          },
+        );
+
+        if (!updateResponse.ok) {
+          const errorData = await updateResponse.json();
+          throw new Error(errorData.message || 'Failed to update entry');
+        }
+
+        alert('Entry updated successfully!');
+
+        // Reset the form and event handler
+        diaryForm.reset();
+        delete diaryForm.dataset.editEntryId;
+        diaryForm.onsubmit = null;
+        submitButton.textContent = 'Save Entry';
+
+        // Restore default form submission behavior
+        setupDiaryForm();
+
+        // Refresh entries
+        fetchAndDisplayEntries();
+        fetchAndDisplayRecentEntries();
+      } catch (error) {
+        console.error('Error updating entry:', error);
+        alert(`Error: ${error.message}`);
+      } finally {
+        // Re-enable the submit button
+        if (submitButton) submitButton.disabled = false;
+      }
+    };
+  } catch (error) {
+    console.error('Error editing entry:', error);
+    alert(`Error: ${error.message}`);
+  }
+}
+
+// Function to delete an entry
+async function deleteEntry(entryId) {
+  if (!confirm('Are you sure you want to delete this entry?')) {
+    return;
+  }
+  try {
+    // Get authentication token from localStorage
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      alert('You need to be logged in to delete entries');
+      return;
+    }
+
+    const response = await fetch(
+      `http://localhost:3000/api/entries/${entryId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete entry: ${response.statusText}`);
+    }
+
+    // Refresh the entries list
+    fetchAndDisplayEntries();
+    if (typeof fetchAndDisplayRecentEntries === 'function') {
+      fetchAndDisplayRecentEntries();
+    }
+
+    alert('Entry deleted successfully');
+  } catch (error) {
+    console.error('Error deleting entry:', error);
+    alert(`Error: ${error.message}`);
+  }
+}
+
 // Update the setupDiaryForm function to prevent double submission
 function setupDiaryForm() {
   const diaryForm = document.getElementById('diary-form');
@@ -291,7 +389,10 @@ function setupDiaryForm() {
 
     // Disable form submission button to prevent double-clicks
     const submitButton = diaryForm.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.disabled = true;
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Saving...';
+    }
 
     const date = document.getElementById('entry-date').value;
     const mood = document.getElementById('mood').value;
@@ -306,6 +407,9 @@ function setupDiaryForm() {
       window.location.href = '/src/pages/login.html';
       return;
     }
+
+    // Clear any existing status messages
+    removeStatusMessage();
 
     try {
       // The fetch override will add the auth header automatically
@@ -330,8 +434,11 @@ function setupDiaryForm() {
 
       const data = await response.json();
 
-      // Build a single message with both entry creation and achievements
-      let message = 'Entry created successfully!';
+      // Show success message with non-blocking UI
+      const successInfo = createStatusMessage('success');
+
+      // Build success message content
+      let messageContent = '<strong>Entry created successfully!</strong>';
 
       // Add achievement information if available
       if (
@@ -339,14 +446,16 @@ function setupDiaryForm() {
         data.entry.achievements &&
         data.entry.achievements.length > 0
       ) {
-        message += "\n\nYou've unlocked new achievements:";
+        messageContent +=
+          "<div class='achievements-list'><p>You've unlocked new achievements:</p><ul>";
         data.entry.achievements.forEach((achievement) => {
-          message += `\n- ${achievement.name}: ${achievement.description} (+${achievement.experience_points} XP)`;
+          messageContent += `<li><strong>${achievement.name}:</strong> ${achievement.description} (+${achievement.experience_points} XP)</li>`;
         });
+        messageContent += '</ul></div>';
       }
 
-      // Show a single alert with all the information
-      alert(message);
+      successInfo.innerHTML = messageContent;
+      diaryForm.appendChild(successInfo);
 
       // Reset the form
       diaryForm.reset();
@@ -369,14 +478,51 @@ function setupDiaryForm() {
           fetchAndDisplayUserStats();
         }
       }
+
+      // Automatically remove success message after 5 seconds
+      setTimeout(() => {
+        if (successInfo && successInfo.parentNode) {
+          successInfo.remove();
+        }
+      }, 5000);
     } catch (error) {
       console.error('Error creating entry:', error);
-      alert(`Error: ${error.message}`);
+
+      // Show error message with non-blocking UI
+      const errorInfo = createStatusMessage('error');
+      errorInfo.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      diaryForm.appendChild(errorInfo);
+
+      // Automatically remove error message after 5 seconds
+      setTimeout(() => {
+        if (errorInfo && errorInfo.parentNode) {
+          errorInfo.remove();
+        }
+      }, 5000);
     } finally {
       // Re-enable the submit button regardless of success/failure
-      if (submitButton) submitButton.disabled = false;
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Save Entry';
+      }
     }
   });
+}
+
+// Helper function to create status messages
+function createStatusMessage(type) {
+  // Remove any existing status messages first
+  removeStatusMessage();
+
+  const statusElement = document.createElement('div');
+  statusElement.className = `status-message ${type}-message`;
+  return statusElement;
+}
+
+// Helper function to remove status messages
+function removeStatusMessage() {
+  const existingMessages = document.querySelectorAll('.status-message');
+  existingMessages.forEach((message) => message.remove());
 }
 
 // Call functions when the page loads

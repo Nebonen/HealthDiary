@@ -1,4 +1,4 @@
-import db from '../utils/database.js';
+import promisePool from '../utils/database.js';
 import * as achievementModel from './achievementModel.js';
 
 /**
@@ -8,7 +8,7 @@ import * as achievementModel from './achievementModel.js';
  */
 const createEntry = async (entry) => {
   try {
-    const [result] = await db.execute(
+    const [result] = await promisePool.query(
       'INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes) VALUES (?, ?, ?, ?, ?, ?)',
       [
         entry.userId,
@@ -43,7 +43,7 @@ const createEntry = async (entry) => {
  */
 const getEntriesByUserId = async (userId) => {
   try {
-    const [rows] = await db.execute(
+    const [rows] = await promisePool.query(
       'SELECT * FROM DiaryEntries WHERE user_id = ? ORDER BY entry_date DESC',
       [userId],
     );
@@ -62,7 +62,7 @@ const getEntriesByUserId = async (userId) => {
  */
 const getEntryById = async (entryId, userId) => {
   try {
-    const [rows] = await db.execute(
+    const [rows] = await promisePool.query(
       'SELECT * FROM DiaryEntries WHERE entry_id = ? AND user_id = ?',
       [entryId, userId],
     );
@@ -82,7 +82,7 @@ const getEntryById = async (entryId, userId) => {
  */
 const updateEntry = async (entryId, entry, userId) => {
   try {
-    const [result] = await db.execute(
+    const [result] = await promisePool.query(
       'UPDATE DiaryEntries SET mood = ?, weight = ?, sleep_hours = ?, notes = ? WHERE entry_id = ? AND user_id = ?',
       [
         entry.mood,
@@ -109,7 +109,7 @@ const updateEntry = async (entryId, entry, userId) => {
  */
 const deleteEntry = async (entryId, userId) => {
   try {
-    const [result] = await db.execute(
+    const [result] = await promisePool.query(
       'DELETE FROM DiaryEntries WHERE entry_id = ? AND user_id = ?',
       [entryId, userId],
     );

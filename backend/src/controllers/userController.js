@@ -119,6 +119,26 @@ const getUserProfile = async (req, res, next) => {
 };
 
 /**
+ * Delete current user account
+ */
+const deleteUserAccount = async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+
+    // Delete the user account
+    const success = await userModel.deleteUser(userId);
+
+    if (!success) {
+      return res.status(400).json({message: 'Failed to delete user account'});
+    }
+
+    res.json({message: 'User account deleted successfully'});
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Validate the token
  */
 const validateToken = async (req, res, next) => {
@@ -139,4 +159,10 @@ const validateToken = async (req, res, next) => {
   }
 };
 
-export {registerUser, loginUser, getUserProfile, validateToken};
+export {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  validateToken,
+  deleteUserAccount,
+};

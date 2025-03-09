@@ -2,7 +2,6 @@ import '../css/index.css';
 import {
   fetchAndDisplayEntries,
   fetchAndDisplayRecentEntries,
-  setupDiaryForm,
 } from './entries.js';
 import fetchAndDisplayUserStats from './user.js';
 import {checkAuthentication, validateToken} from './authentication.js';
@@ -18,9 +17,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (isValid) {
       // Set today's date
       dateToToday();
-
-      // Setup the diary form
-      setupDiaryForm();
 
       // Load entries
       fetchAndDisplayRecentEntries();

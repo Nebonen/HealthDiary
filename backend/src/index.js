@@ -3,8 +3,8 @@ import cors from 'cors';
 import userRouter from './routers/userRouter.js';
 import entryRouter from './routers/entryRouter.js';
 import achievementRouter from './routers/achievementRouter.js';
+import adminRouter from './routers/adminRouter.js';
 import {errorHandler, notFoundHandler} from './middlewares/errorHandler.js';
-import path from 'path';
 
 const hostname = 'localhost';
 const port = 3000;
@@ -21,6 +21,7 @@ app.use(express.json());
 app.use('/api', userRouter);
 app.use('/api/entries', entryRouter);
 app.use('/api/achievements', achievementRouter);
+app.use('/api/admin', adminRouter);
 
 // Serve index.html for root route in production
 app.get('/', (req, res) => {

@@ -1,4 +1,4 @@
-import db from '../utils/database.js';
+import promisePool from '../utils/database.js';
 
 /**
  * Get all achievements
@@ -6,7 +6,7 @@ import db from '../utils/database.js';
  */
 const getAllAchievements = async () => {
   try {
-    const [rows] = await db.execute('SELECT * FROM Achievements');
+    const [rows] = await promisePool.query('SELECT * FROM Achievements');
     return rows;
   } catch (error) {
     console.error('getAllAchievements error:', error);
@@ -21,7 +21,7 @@ const getAllAchievements = async () => {
  */
 const getAchievementById = async (achievementId) => {
   try {
-    const [rows] = await db.execute(
+    const [rows] = await promisePool.query(
       'SELECT * FROM Achievements WHERE achievement_id = ?',
       [achievementId],
     );
@@ -39,7 +39,7 @@ const getAchievementById = async (achievementId) => {
  */
 const getUserAchievements = async (userId) => {
   try {
-    const [rows] = await db.execute(
+    const [rows] = await promisePool.query(
       `SELECT ua.user_achievement_id, ua.user_id, ua.unlocked_at, 
        a.achievement_id, a.name, a.description, a.experience_points, a.requirement
        FROM UserAchievements ua
@@ -61,7 +61,7 @@ const getUserAchievements = async (userId) => {
  */
 const createAchievement = async (achievement) => {
   try {
-    const [result] = await db.execute(
+    const [result] = await promisePool.query(
       'INSERT INTO Achievements (name, description, experience_points, requirement) VALUES (?, ?, ?, ?)',
       [
         achievement.name,
@@ -89,7 +89,7 @@ const createAchievement = async (achievement) => {
  */
 const updateAchievement = async (achievementId, achievement) => {
   try {
-    const [result] = await db.execute(
+    const [result] = await promisePool.query(
       'UPDATE Achievements SET name = ?, description = ?, experience_points = ?, requirement = ? WHERE achievement_id = ?',
       [
         achievement.name,
@@ -122,7 +122,7 @@ const updateAchievement = async (achievementId, achievement) => {
 const deleteAchievement = async (achievementId) => {
   try {
     // First check if there are any user achievements linked to this achievement
-    const [userAchievements] = await db.execute(
+    const [userAchievements] = await promisePool.query(
       'SELECT user_achievement_id FROM UserAchievements WHERE achievement_id = ?',
       [achievementId],
     );
@@ -134,7 +134,7 @@ const deleteAchievement = async (achievementId) => {
       );
     }
 
-    const [result] = await db.execute(
+    const [result] = await promisePool.query(
       'DELETE FROM Achievements WHERE achievement_id = ?',
       [achievementId],
     );
@@ -155,7 +155,7 @@ const deleteAchievement = async (achievementId) => {
 const unlockAchievement = async (userId, achievementId) => {
   try {
     // Check if user already has this achievement
-    const [existingAchievements] = await db.execute(
+    const [existingAchievements] = await promisePool.query(
       'SELECT * FROM UserAchievements WHERE user_id = ? AND achievement_id = ?',
       [userId, achievementId],
     );
@@ -165,7 +165,7 @@ const unlockAchievement = async (userId, achievementId) => {
     }
 
     // Get the achievement details
-    const [achievements] = await db.execute(
+    const [achievements] = await promisePool.query(
       'SELECT * FROM Achievements WHERE achievement_id = ?',
       [achievementId],
     );
@@ -177,13 +177,13 @@ const unlockAchievement = async (userId, achievementId) => {
     const achievement = achievements[0];
 
     // Insert into UserAchievements
-    await db.execute(
+    await promisePool.query(
       'INSERT INTO UserAchievements (user_id, achievement_id, description) VALUES (?, ?, ?)',
       [userId, achievementId, achievement.description],
     );
 
     // Award experience points to the user
-    await db.execute(
+    await promisePool.query(
       'UPDATE Users SET experience = experience + ? WHERE user_id = ?',
       [achievement.experience_points, userId],
     );
@@ -207,7 +207,7 @@ const unlockAchievement = async (userId, achievementId) => {
 const checkAchievements = async (userId) => {
   try {
     // Get user stats
-    const [userRows] = await db.execute(
+    const [userRows] = await promisePool.query(
       'SELECT total_entries, current_streak, highest_streak FROM Users WHERE user_id = ?',
       [userId],
     );
@@ -220,7 +220,7 @@ const checkAchievements = async (userId) => {
     const newAchievements = [];
 
     // Get all achievements the user doesn't have yet
-    const [availableAchievements] = await db.execute(
+    const [availableAchievements] = await promisePool.query(
       `SELECT * FROM Achievements WHERE achievement_id NOT IN 
        (SELECT achievement_id FROM UserAchievements WHERE user_id = ?)`,
       [userId],

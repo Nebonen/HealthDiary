@@ -47,10 +47,8 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="profile-buttons">
-                            <button id="change-password-btn" class="secondary-btn">Change Password</button>
-                            <button id="edit-profile-btn" class="secondary-btn">Edit Profile</button>
+                            <button id="delete-account-btn" class="delete-btn">Delete Account</button>
                         </div>
                     </div>
                     
@@ -99,52 +97,10 @@
                             <p class="loading">Loading achievements...</p>
                         </div>
                     </div>
-                    
-                    <div class="card">
-                        <div class="heading-with-link">
-                            <h2>Entry Statistics</h2>
-                        </div>
-                        <div id="entry-stats">
-                            <div class="chart-container">
-                                <canvas id="mood-chart"></canvas>
-                                <div class="chart-title">Mood Distribution</div>
-                            </div>
-                            
-                            <div class="chart-container">
-                                <canvas id="weight-chart"></canvas>
-                                <div class="chart-title">Weight Tracking</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Password Change Modal -->
-        <div id="password-modal" class="modal">
-            <div class="modal-content">
-                <button class="close-modal" id="close-password-modal">&times;</button>
-                <h2>Change Password</h2>
-                <form id="password-form">
-                    <div class="form-group">
-                        <label for="current-password">Current Password</label>
-                        <input type="password" id="current-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="new-password">New Password</label>
-                        <input type="password" id="new-password" required minlength="6">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password">Confirm New Password</label>
-                        <input type="password" id="confirm-password" required minlength="6">
-                    </div>
-                    <button type="submit" class="auth-btn">Update Password</button>
-                    <div id="password-error" class="error-message"></div>
-                    <div id="password-success" class="success-message"></div>
-                </form>
-            </div>
-        </div>
-        
+
         <!-- Footer -->
         <footer class="footer">
             <p>© 2025 Daily Tracker. All rights reserved.</p>

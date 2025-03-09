@@ -28,6 +28,7 @@ router.get('/auth/validate', authenticate, userController.validateToken);
 
 // Protected routes - require authentication
 router.get('/users/profile', authenticate, userController.getUserProfile);
+router.delete('/users/profile', authenticate, userController.deleteUserAccount);
 
 // Achievement routes
 router.get(
@@ -40,10 +41,5 @@ router.get(
   authenticate,
   achievementController.getUserAchievements,
 );
-
-// Admin routes - require admin role
-router.get('/admin/users', authenticate, authorize(['admin']), (req, res) => {
-  res.json({message: 'Admin access - user list would go here'});
-});
 
 export default router;

@@ -10,6 +10,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         login: resolve(__dirname, 'src/pages/login.html'),
         profile: resolve(__dirname, 'src/pages/profile.html'),
+        admin: resolve(__dirname, 'src/pages/admin.html'),
       },
     },
   },

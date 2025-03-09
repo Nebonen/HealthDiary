@@ -13,6 +13,22 @@ const getAllAchievements = async (req, res, next) => {
 };
 
 /**
+ * Get achievement by ID
+ */
+const getAchievementById = async (req, res, next) => {
+  try {
+    const achievementId = req.params.id;
+    const achievement =
+      await achievementModel.getAchievementById(achievementId);
+    if (!achievement) {
+      return res.status(404).json({message: 'Achievement not found'});
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
  * Get current user's achievements
  */
 const getUserAchievements = async (req, res, next) => {
@@ -122,6 +138,7 @@ const deleteAchievement = async (req, res, next) => {
 
 export {
   getAllAchievements,
+  getAchievementById,
   getUserAchievements,
   createAchievement,
   updateAchievement,

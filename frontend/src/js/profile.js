@@ -68,93 +68,106 @@ async function fetchAndDisplayAchievements() {
     achievementsContainer.innerHTML =
       '<p class="loading">Loading achievements...</p>';
 
-    // Fetch user achievements
-    const response = await fetch(
-      'http://localhost:3000/api/users/achievements',
-    );
+    // Fetch both user achievements and all available achievements in parallel
+    const [userResponse, allResponse] = await Promise.all([
+      fetch('http://localhost:3000/api/users/achievements'),
+      fetch('http://localhost:3000/api/achievements'),
+    ]);
 
-    if (!response.ok) {
+    if (!userResponse.ok || !allResponse.ok) {
       throw new Error('Failed to fetch achievements');
     }
 
-    const achievements = await response.json();
+    const userAchievements = await userResponse.json();
+    const allAchievements = await allResponse.json();
 
     // Clear loading message
     achievementsContainer.innerHTML = '';
 
-    // Check if there are achievements
-    if (achievements.length === 0) {
-      achievementsContainer.innerHTML =
-        "<p>You haven't unlocked any achievements yet.</p>";
-      return;
-    }
+    // Display unlocked achievements if there are any
+    if (userAchievements.length > 0) {
+      const unlockedTitle = document.createElement('h3');
+      unlockedTitle.style.marginBottom = '1rem';
+      unlockedTitle.textContent = 'Unlocked Achievements';
+      achievementsContainer.appendChild(unlockedTitle);
 
-    // Display each achievement
-    achievements.forEach((achievement) => {
-      const achievementItem = document.createElement('div');
-      achievementItem.className = 'achievement-item';
+      // Display each achievement
+      userAchievements.forEach((achievement) => {
+        const achievementItem = document.createElement('div');
+        achievementItem.className = 'achievement-item';
 
-      // Format the unlocked date
-      const unlockedDate = new Date(achievement.unlocked_at);
-      const formattedDate = unlockedDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+        // Format the unlocked date
+        const unlockedDate = new Date(achievement.unlocked_at);
+        const formattedDate = unlockedDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+
+        achievementItem.innerHTML = `
+          <div class="achievement-header">
+            <div class="achievement-name">${achievement.name}</div>
+            <div class="achievement-xp">+${achievement.experience_points} XP</div>
+          </div>
+          <div class="achievement-description">${achievement.description}</div>
+          <div class="achievement-date">Unlocked on: ${formattedDate}</div>
+        `;
+
+        achievementsContainer.appendChild(achievementItem);
       });
 
-      achievementItem.innerHTML = `
-        <div class="achievement-header">
-          <div class="achievement-name">${achievement.name}</div>
-          <div class="achievement-xp">+${achievement.experience_points} XP</div>
-        </div>
-        <div class="achievement-description">${achievement.description}</div>
-        <div class="achievement-date">Unlocked on: ${formattedDate}</div>
-      `;
+      // Add a separator if there are unlocked achievements
+      const separator = document.createElement('hr');
+      separator.style.margin = '1.5rem 0';
+      achievementsContainer.appendChild(separator);
+    } else {
+      // Message if no achievements unlocked yet
+      const noAchievementsMsg = document.createElement('p');
+      noAchievementsMsg.textContent =
+        "You haven't unlocked any achievements yet.";
+      achievementsContainer.appendChild(noAchievementsMsg);
 
-      achievementsContainer.appendChild(achievementItem);
-    });
+      // Add some space before locked achievements
+      const spacer = document.createElement('div');
+      spacer.style.height = '1.5rem';
+      achievementsContainer.appendChild(spacer);
+    }
 
-    // Also fetch all available achievements to show locked ones
-    const allResponse = await fetch('http://localhost:3000/api/achievements');
+    // Filter out the achievements the user already has
+    const unlockedIds = userAchievements.map((a) => a.achievement_id);
+    const lockedAchievements = allAchievements.filter(
+      (a) => !unlockedIds.includes(a.achievement_id),
+    );
 
-    if (allResponse.ok) {
-      const allAchievements = await allResponse.json();
+    // Show locked achievements section
+    const lockedTitle = document.createElement('h3');
+    lockedTitle.style.marginBottom = '1rem';
+    lockedTitle.textContent = 'Locked Achievements';
+    achievementsContainer.appendChild(lockedTitle);
 
-      // Filter out the achievements the user already has
-      const unlockedIds = achievements.map((a) => a.achievement_id);
-      const lockedAchievements = allAchievements.filter(
-        (a) => !unlockedIds.includes(a.achievement_id),
-      );
+    // Display each locked achievement or a message if all are unlocked
+    if (lockedAchievements.length > 0) {
+      lockedAchievements.forEach((achievement) => {
+        const achievementItem = document.createElement('div');
+        achievementItem.className = 'achievement-item locked';
 
-      // Show locked achievements if there are any
-      if (lockedAchievements.length > 0) {
-        // Add a separator
-        const separator = document.createElement('hr');
-        separator.style.margin = '1.5rem 0';
-        achievementsContainer.appendChild(separator);
+        achievementItem.innerHTML = `
+          <div class="achievement-header">
+            <div class="achievement-name">${achievement.name}</div>
+            <div class="achievement-xp">+${achievement.experience_points} XP</div>
+          </div>
+          <div class="achievement-description">${achievement.description}</div>
+          <div class="achievement-requirement">Requirement: ${achievement.requirement}</div>
+        `;
 
-        const lockedTitle = document.createElement('h3');
-        lockedTitle.style.marginBottom = '1rem';
-        lockedTitle.textContent = 'Locked Achievements';
-        achievementsContainer.appendChild(lockedTitle);
-
-        // Display each locked achievement
-        lockedAchievements.forEach((achievement) => {
-          const achievementItem = document.createElement('div');
-          achievementItem.className = 'achievement-item locked';
-
-          achievementItem.innerHTML = `
-            <div class="achievement-header">
-              <div class="achievement-name">${achievement.name}</div>
-              <div class="achievement-xp">+${achievement.experience_points} XP</div>
-            </div>
-            <div class="achievement-description">${achievement.description}</div>
-            <div class="achievement-requirement">Requirement: ${achievement.requirement}</div>
-          `;
-
-          achievementsContainer.appendChild(achievementItem);
-        });
-      }
+        achievementsContainer.appendChild(achievementItem);
+      });
+    } else {
+      // Message if all achievements are unlocked
+      const allUnlockedMsg = document.createElement('p');
+      allUnlockedMsg.textContent =
+        "Congratulations! You've unlocked all available achievements.";
+      achievementsContainer.appendChild(allUnlockedMsg);
     }
   } catch (error) {
     console.error('Error fetching achievements:', error);
@@ -167,105 +180,122 @@ async function fetchAndDisplayAchievements() {
   }
 }
 
-// Function to set up the password change modal
-function setupPasswordModal() {
-  const modal = document.getElementById('password-modal');
-  const openModalBtn = document.getElementById('change-password-btn');
-  const closeModalBtn = document.getElementById('close-password-modal');
-  const passwordForm = document.getElementById('password-form');
-  const passwordError = document.getElementById('password-error');
-  const passwordSuccess = document.getElementById('password-success');
+async function setupDeleteAccountButton() {
+  const deleteAccountBtn = document.getElementById('delete-account-btn');
+  if (!deleteAccountBtn) return;
 
-  if (!modal || !openModalBtn) return;
+  deleteAccountBtn.addEventListener('click', () => {
+    // Create a modal for confirmation
+    const modal = document.createElement('div');
+    modal.id = 'delete-account-modal';
+    modal.className = 'modal';
 
-  openModalBtn.addEventListener('click', function () {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button class="close-modal" id="close-delete-modal">&times;</button>
+        <div class="confirmation-modal">
+          <h3>Delete Your Account</h3>
+          <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+          <p>All your diary entries and achievements will be permanently deleted.</p>
+          
+          <div class="confirmation-actions">
+            <button class="cancel-btn" id="cancel-delete">Cancel</button>
+            <button class="delete-btn" id="confirm-delete">Delete My Account</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
     modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-  });
+    document.body.style.overflow = 'hidden';
 
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', function () {
+    // Setup close handlers
+    const closeBtn = document.getElementById('close-delete-modal');
+    const cancelBtn = document.getElementById('cancel-delete');
+
+    const closeModal = () => {
       modal.style.display = 'none';
       document.body.style.overflow = '';
-      passwordError.style.display = 'none';
-      passwordSuccess.style.display = 'none';
-      passwordForm.reset();
-    });
-  }
+      // Remove the modal from DOM after animation completes
+      setTimeout(() => {
+        document.body.removeChild(modal);
+      }, 300);
+    };
 
-  // Close modal when clicking outside
-  window.addEventListener('click', function (event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-      passwordError.style.display = 'none';
-      passwordSuccess.style.display = 'none';
-      passwordForm.reset();
-    }
-  });
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
 
-  // Password form submission handler
-  if (passwordForm) {
-    passwordForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const currentPassword = document.getElementById('current-password').value;
-      const newPassword = document.getElementById('new-password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-
-      // Reset error/success messages
-      passwordError.style.display = 'none';
-      passwordSuccess.style.display = 'none';
-
-      // Validate passwords match
-      if (newPassword !== confirmPassword) {
-        passwordError.textContent = 'New passwords do not match.';
-        passwordError.style.display = 'block';
-        return;
-      }
-
-      // Send password update request
+    // Handle delete confirmation
+    const confirmDeleteBtn = document.getElementById('confirm-delete');
+    confirmDeleteBtn.addEventListener('click', async () => {
       try {
-        // This is a placeholder - you'll need to implement this API endpoint
+        // Disable the button to prevent multiple clicks
+        confirmDeleteBtn.disabled = true;
+        confirmDeleteBtn.textContent = 'Deleting...';
+
+        // Send delete request to the API
         const response = await fetch(
-          'http://localhost:3000/api/users/password',
+          'http://localhost:3000/api/users/profile',
           {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              currentPassword,
-              newPassword,
-            }),
+            method: 'DELETE',
           },
         );
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to update password');
+          const data = await response.json();
+          throw new Error(data.message || 'Failed to delete account');
         }
 
-        // Show success message
-        passwordSuccess.textContent = 'Password updated successfully!';
-        passwordSuccess.style.display = 'block';
+        // On success, clear local storage and redirect to login page
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
 
-        // Reset the form
-        passwordForm.reset();
+        // Show a brief success message before redirecting
+        const confirmationDiv = document.querySelector('.confirmation-modal');
+        confirmationDiv.innerHTML = `
+          <h3 style="color: #27ae60;">Account Deleted</h3>
+          <p>Your account has been successfully deleted.</p>
+          <p>Redirecting to login page...</p>
+        `;
 
-        // Close modal after a delay
+        // Redirect after a brief delay
         setTimeout(() => {
-          modal.style.display = 'none';
-          document.body.style.overflow = '';
+          window.location.href = '/src/pages/login.html';
         }, 2000);
       } catch (error) {
-        console.error('Error updating password:', error);
-        passwordError.textContent =
-          error.message || 'Failed to update password. Please try again.';
-        passwordError.style.display = 'block';
+        console.error('Error deleting account:', error);
+
+        // Show error in the modal
+        const confirmationActions = document.querySelector(
+          '.confirmation-actions',
+        );
+        confirmationActions.innerHTML = `
+          <p style="color: #e74c3c;">Error: ${error.message}</p>
+          <button class="cancel-btn" id="error-close">Close</button>
+        `;
+
+        // Setup close handler for error message
+        document
+          .getElementById('error-close')
+          .addEventListener('click', closeModal);
       }
     });
-  }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
+      }
+    });
+  });
 }
 
 // Initialize page
@@ -296,8 +326,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Display achievements
     fetchAndDisplayAchievements();
 
-    // Set up password modal
-    setupPasswordModal();
+    setupDeleteAccountButton();
 
     // Note: For the charts, you would need to add Chart.js to your dependencies
     // This is a placeholder for that functionality

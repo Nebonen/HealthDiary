@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Daily Tracker - Admin Dashboard</title>
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo">Daily Tracker Admin</div>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/src/pages/profile.html">Profile</a></li>
+                <li><a href="#" class="active">Admin</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="section-title">Admin Dashboard</h1>
+            
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Total Users</div>
+                    <div class="stat-number" id="total-users">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Total Entries</div>
+                    <div class="stat-number" id="total-entries">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">New Users (30 days)</div>
+                    <div class="stat-number" id="new-users">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">New Entries (30 days)</div>
+                    <div class="stat-number" id="new-entries">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Achievements Earned</div>
+                    <div class="stat-number" id="achievements-earned">-</div>
+                </div>
+            </div>
+            
+            <div class="admin-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="users">Manage Users</button>
+                    <button class="tab-btn" data-tab="achievements">Manage Achievements</button>
+                </div>
+                
+                <!-- Users Tab -->
+                <div class="tab-content active" id="users-tab">
+                    <div class="admin-card">
+                        <h2>All Users</h2>
+                        <div class="table-container">
+                            <table id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Level</th>
+                                        <th>Entries</th>
+                                        <th>Joined</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <tr>
+                                        <td colspan="8">Loading users...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Achievements Tab -->
+                <div class="tab-content" id="achievements-tab">
+                    <div class="admin-card">
+                        <h2>Achievements Management</h2>
+                        <button id="add-achievement-btn" class="primary-btn">Add New Achievement</button>
+                        
+                        <div class="table-container">
+                            <table id="achievements-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>XP</th>
+                                        <th>Requirement</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="achievements-table-body">
+                                    <tr>
+                                        <td colspan="6">Loading achievements...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Details Modal -->
+        <div id="user-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="close-user-modal">&times;</button>
+                <h2>User Details</h2>
+                <div id="user-details-content">
+                    <p>Loading user details...</p>
+                </div>
+                <div class="modal-actions">
+                    <button id="make-admin-btn" class="secondary-btn">Make Admin</button>
+                    <button id="remove-admin-btn" class="secondary-btn">Remove Admin</button>
+                    <button id="delete-user-btn" class="delete-btn">Delete User</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Achievement Form Modal -->
+        <div id="achievement-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-modal" id="close-achievement-modal">&times;</button>
+                <h2 id="achievement-form-title">Add Achievement</h2>
+                <form id="achievement-form">
+                    <input type="hidden" id="achievement-id">
+                    <div class="form-group">
+                        <label for="achievement-name">Name:</label>
+                        <input type="text" id="achievement-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-description">Description:</label>
+                        <input type="text" id="achievement-description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-xp">Experience Points:</label>
+                        <input type="number" id="achievement-xp" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-requirement">Requirement:</label>
+                        <input type="text" id="achievement-requirement" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="primary-btn">Save</button>
+                        <button type="button" id="cancel-achievement" class="secondary-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 Daily Tracker. All rights reserved.</p>
+            <p>Track your daily habits and improve your well-being.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </footer>
+        
+        <script type="module" src="/src/js/admin.js"></script>
+    </body>
+</html>
