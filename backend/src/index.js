@@ -12,6 +12,7 @@ const app = express();
 
 // Static files
 app.use('/', express.static('public'));
+app.use('/api', express.static('docs'));
 
 // Middleware
 app.use(cors());
