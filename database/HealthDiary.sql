@@ -54,6 +54,8 @@ INSERT INTO Achievements (name, experience_points, description, requirement) VAL
 ('Weight Loss', 30, 'Lose 5 kg.', 'Lose 5 kg from your initial weight.'),
 ('Sleep Improvement', 20, 'Average sleep hours above 7.', 'Average sleep hours above 7 for a month.');
 
--- Admin user with password "admin123" (bcrypt hashed)
+-- Admin user with password "admin123"
 INSERT INTO Users (username, email, password, user_level) VALUES
-('admin', 'admin@healthdiary.com', '$2b$10$OG0BUWaZo/oIqm.jsSMiEet0CXnIf4gqSC3ZfIpqlZV51xnW1YBL2', 'admin');
+('admin', 'admin@healthdiary.com', '$2b$10$OG0BUWaZo/oIqm.jsSMiEet0CXnIf4gqSC3ZfIpqlZV51xnW1YBL2', 'admin'),
+-- Regular user with password "testi123"
+('testi', 'testi@testi.com', '$2b$10$2SYoXnJwyKByh7IckxbRhOaOSRxSjvcW28CJedSC6jfCv2mJpcP66', 'regular');

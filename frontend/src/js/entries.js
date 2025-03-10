@@ -114,7 +114,7 @@ async function fetchAndDisplayEntries() {
 async function fetchAndDisplayRecentEntries() {
   try {
     const recentEntriesContainer = document.getElementById('recent-entries');
-    
+
     if (!recentEntriesContainer) {
       console.error('Recent entries container not found');
       return;
@@ -332,6 +332,9 @@ async function deleteEntry(entryId) {
     if (typeof fetchAndDisplayRecentEntries === 'function') {
       fetchAndDisplayRecentEntries();
     }
+
+    // Refresh user stats
+    fetchAndDisplayUserStats();
 
     alert('Entry deleted successfully');
   } catch (error) {

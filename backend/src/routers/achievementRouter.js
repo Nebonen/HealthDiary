@@ -17,7 +17,7 @@ router.use(authenticate);
 router.get('/', achievementController.getAllAchievements);
 
 // Get achievement by ID
-router.get('/', achievementController.getAchievementById);
+router.get('/:id', achievementController.getAchievementById);
 
 // Get current user's achievements
 router.get('/user', achievementController.getUserAchievements);

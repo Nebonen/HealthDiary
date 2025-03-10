@@ -23,6 +23,7 @@ const getAchievementById = async (req, res, next) => {
     if (!achievement) {
       return res.status(404).json({message: 'Achievement not found'});
     }
+    res.json(achievement);
   } catch (error) {
     next(error);
   }

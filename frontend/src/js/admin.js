@@ -128,7 +128,7 @@ async function loadUsersTable() {
         <td>${user.username}</td>
         <td>${user.email}</td>
         <td>${user.level || 1}</td>
-        <td>${user.entry_count || 0}</td>
+        <td>${user.total_entries || 0}</td>
         <td>${createdDate}</td>
         <td>
           <span class="role-badge role-${user.user_role}">${user.user_level}</span>
@@ -317,7 +317,7 @@ async function openUserModal(userId) {
         </div>
         <div class="detail-row">
           <div class="detail-label">Entries:</div>
-          <div>${user.entry_count || 0}</div>
+          <div>${user.total_entries || 0}</div>
         </div>
         <div class="detail-row">
           <div class="detail-label">Current Streak:</div>
@@ -325,7 +325,7 @@ async function openUserModal(userId) {
         </div>
         <div class="detail-row">
           <div class="detail-label">Best Streak:</div>
-          <div>${user.best_streak || 0} days</div>
+          <div>${user.highest_streak || 0} days</div>
         </div>
       </div>
     `;
@@ -419,7 +419,11 @@ async function deleteUser() {
   }
 
   // Confirm deletion
-  if (!confirm('Are you sure you want to delete this user? This action cannot be undone.',)) {
+  if (
+    !confirm(
+      'Are you sure you want to delete this user? This action cannot be undone.',
+    )
+  ) {
     return;
   }
 
@@ -460,7 +464,7 @@ function setupAchievementModal() {
 
   if (!modal || !closeBtn || !form) return;
 
-// tarviiiko if-lausetta?
+  // tarviiiko if-lausetta?
   if (addBtn) {
     addBtn.addEventListener('click', () => {
       openAchievementModal();
@@ -490,9 +494,13 @@ function setupAchievementModal() {
 
     const achievementId = document.getElementById('achievement-id').value;
     const name = document.getElementById('achievement-name').value;
-    const description = document.getElementById('achievement-description',).value;
+    const description = document.getElementById(
+      'achievement-description',
+    ).value;
     const experience = document.getElementById('achievement-xp').value;
-    const requirement = document.getElementById('achievement-requirement',).value;
+    const requirement = document.getElementById(
+      'achievement-requirement',
+    ).value;
 
     const achievementData = {
       name,
@@ -534,7 +542,7 @@ async function openAchievementModal(achievementId = null) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const achievement = await response.json();
-      idInput.value = achievement.id;
+      idInput.value = achievement.achievement_id;
       nameInput.value = achievement.name;
       descInput.value = achievement.description;
       xpInput.value = achievement.experience_points;

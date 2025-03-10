@@ -232,6 +232,7 @@ const checkAchievements = async (userId) => {
 
       // Check achievement requirements
       if (
+        achievement.requirement.includes('entry') &&
         achievement.requirement.includes('entries') &&
         user.total_entries >= parseInt(achievement.requirement.match(/\d+/)[0])
       ) {
@@ -239,6 +240,16 @@ const checkAchievements = async (userId) => {
       } else if (
         achievement.requirement.includes('streak') &&
         user.current_streak >= parseInt(achievement.requirement.match(/\d+/)[0])
+      ) {
+        shouldUnlock = true;
+      } else if (
+        achievement.requirement.includes('weight') &&
+        user.highest_streak >= parseInt(achievement.requirement.match(/\d+/)[0])
+      ) {
+        shouldUnlock = true;
+      } else if (
+        achievement.requirement.includes('sleep') &&
+        user.experience >= parseInt(achievement.requirement.match(/\d+/)[0])
       ) {
         shouldUnlock = true;
       }
