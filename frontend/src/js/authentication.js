@@ -1,9 +1,3 @@
-// Authentication handling for main app
-
-/**
- * Check if user is authenticated
- * @returns {boolean} Authentication status
- */
 function checkAuthentication() {
   const authToken = localStorage.getItem('authToken');
 
@@ -15,14 +9,9 @@ function checkAuthentication() {
     }
     return false;
   }
-
   return true;
 }
 
-/**
- * Validate token with backend
- * @returns {Promise<boolean>} Token validity
- */
 async function validateToken() {
   try {
     const authToken = localStorage.getItem('authToken');
@@ -37,9 +26,8 @@ async function validateToken() {
         Authorization: `Bearer ${authToken}`,
       },
     });
-
     if (!response.ok) {
-      // Token is invalid, clear it and redirect to login
+      // If token is invalid, clear it and redirect to login
       localStorage.removeItem('authToken');
       localStorage.removeItem('userData');
       window.location.href = '/src/pages/login.html';
@@ -51,7 +39,6 @@ async function validateToken() {
     if (userData && userData.user) {
       localStorage.setItem('userData', JSON.stringify(userData.user));
     }
-
     return true;
   } catch (error) {
     console.error('Token validation error:', error);
@@ -59,11 +46,7 @@ async function validateToken() {
   }
 }
 
-/**
- * Log out the user
- */
 function logout() {
-  // Clear the authentication token and user data
   localStorage.removeItem('authToken');
   localStorage.removeItem('userData');
 
@@ -71,7 +54,7 @@ function logout() {
   window.location.href = '/src/pages/login.html';
 }
 
-// Update the fetch override to be more robust
+// ???
 const originalFetch = window.fetch;
 window.fetch = function (url, options = {}) {
   // Create a new options object to avoid modifying the original
@@ -86,10 +69,7 @@ window.fetch = function (url, options = {}) {
       newOptions.headers = newOptions.headers || {};
 
       // Only add Authorization if it's not already present
-      if (
-        !newOptions.headers.Authorization &&
-        !newOptions.headers.authorization
-      ) {
+      if (!newOptions.headers.Authorization && !newOptions.headers.authorization) {
         newOptions.headers.Authorization = `Bearer ${authToken}`;
       }
     }

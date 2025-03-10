@@ -6,6 +6,7 @@ import {
 import fetchAndDisplayUserStats from './user.js';
 import {checkAuthentication, validateToken} from './authentication.js';
 
+// Call all functions when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', async () => {
   // Check if user is logged in
   const isAuthenticated = checkAuthentication();
@@ -31,10 +32,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 const dateToToday = () => {
-  // Set today's date as the default value for the date input
+  // Set today's date as the default value for the date input in the dairy submission form
   const today = new Date();
   const yyyy = today.getFullYear();
-  let mm = today.getMonth() + 1; // Months start at 0
+  let mm = today.getMonth() + 1;
   let dd = today.getDate();
 
   if (dd < 10) dd = '0' + dd;
@@ -53,13 +54,13 @@ const setupEntriesModal = () => {
 
   openModalBtn.addEventListener('click', function () {
     modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
-    fetchAndDisplayEntries(); // Fetch entries when opening the modal
+    document.body.style.overflow = 'hidden';
+    fetchAndDisplayEntries();
   });
 
   closeModalBtn.addEventListener('click', function () {
     modal.style.display = 'none';
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
   });
 
   // Close modal when clicking outside of it

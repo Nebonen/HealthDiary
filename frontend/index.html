@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Daily Tracker</title>
       <script>
-        // Check if user is authenticated more robustly
+        // Function to check if user is logged in
         function redirectToLogin() {
           const authToken = localStorage.getItem('authToken');
           if (!authToken) {
@@ -36,8 +36,6 @@
             window.location.href = '/src/pages/login.html';
           });
         }
-        
-        // Execute the redirect check immediately
         redirectToLogin();
       </script>
   </head>

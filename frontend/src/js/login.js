@@ -78,12 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify({email, password}),
       });
-
-      const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.message || 'Login failed');
       }
+
+      const data = await response.json();
 
       // Store the token and user info in localStorage
       localStorage.setItem('authToken', data.token);
@@ -110,9 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = document.getElementById('register-name').value;
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
-    const confirmPassword = document.getElementById(
-      'register-confirm-password',
-    ).value;
+    const confirmPassword = document.getElementById('register-confirm-password',).value;
 
     // Clear previous messages
     registerError.style.display = 'none';
@@ -134,12 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify({username, email, password}),
       });
-
-      const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.message || 'Registration failed');
       }
+
+      const data = await response.json();
 
       // Show success message
       registerSuccess.textContent =
@@ -149,10 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Clear the form
       registerForm.reset();
 
-      // Switch to login tab after 2 seconds
+      // Switch to login tab after 1 second
       setTimeout(() => {
         document.querySelector('.auth-tab[data-tab="login"]').click();
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.error('Registration error:', error);
       registerError.textContent =
@@ -164,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Check if user is already logged in
   const authToken = localStorage.getItem('authToken');
   if (authToken) {
-    // Validate token
     fetch('http://localhost:3000/api/auth/validate', {
       method: 'GET',
       headers: {

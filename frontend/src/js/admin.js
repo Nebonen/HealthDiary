@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.location.href = '/src/pages/login.html';
       return;
     }
-
-    // Validate token with backend
     await validateToken();
 
     // Add logout functionality
@@ -29,20 +27,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.location.href = '/index.html';
       return;
     }
-
-    // Setup tab switching
     setupTabSwitching();
-
-    // Load system statistics
     loadSystemStats();
-
-    // Load users table
     loadUsersTable();
-
-    // Load achievements table
     loadAchievementsTable();
-
-    // Setup modal dialogs
     setupUserModal();
     setupAchievementModal();
   } catch (error) {
@@ -51,10 +39,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-// Function to handle tab switching
 function setupTabSwitching() {
   const tabButtons = document.querySelectorAll('.tab-btn');
-
   tabButtons.forEach((button) => {
     button.addEventListener('click', () => {
       // Remove active class from all buttons
@@ -76,17 +62,14 @@ function setupTabSwitching() {
   });
 }
 
-// Function to load system statistics
 async function loadSystemStats() {
   try {
     const response = await fetch('http://localhost:3000/api/admin/stats');
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const stats = await response.json();
-
     // Update the stats in the UI
     document.getElementById('total-users').textContent = stats.totalUsers || 0;
     document.getElementById('total-entries').textContent =
@@ -108,26 +91,21 @@ async function loadSystemStats() {
   }
 }
 
-// Function to load users table
 async function loadUsersTable() {
   const tableBody = document.getElementById('users-table-body');
   if (!tableBody) return;
-
   try {
     // Show loading state
     tableBody.innerHTML = '<tr><td colspan="8">Loading users...</td></tr>';
 
     const response = await fetch('http://localhost:3000/api/admin/users');
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const users = await response.json();
-
     // Clear the table
     tableBody.innerHTML = '';
-
     if (users.length === 0) {
       tableBody.innerHTML = '<tr><td colspan="8">No users found</td></tr>';
       return;
@@ -136,7 +114,6 @@ async function loadUsersTable() {
     // Add users to the table
     users.forEach((user) => {
       const row = document.createElement('tr');
-
       // Format the date
       const createdDate = new Date(user.created_at).toLocaleDateString(
         'en-US',
@@ -146,7 +123,6 @@ async function loadUsersTable() {
           day: 'numeric',
         },
       );
-
       row.innerHTML = `
         <td>${user.user_id}</td>
         <td>${user.username}</td>
@@ -161,7 +137,6 @@ async function loadUsersTable() {
           <button class="view-btn" data-user-id="${user.user_id}">View</button>
         </td>
       `;
-
       tableBody.appendChild(row);
     });
 
@@ -183,23 +158,19 @@ async function loadUsersTable() {
 async function loadAchievementsTable() {
   const tableBody = document.getElementById('achievements-table-body');
   if (!tableBody) return;
-
   try {
     // Show loading state
     tableBody.innerHTML =
       '<tr><td colspan="6">Loading achievements...</td></tr>';
 
     const response = await fetch('http://localhost:3000/api/achievements');
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const achievements = await response.json();
-
     // Clear the table
     tableBody.innerHTML = '';
-
     if (achievements.length === 0) {
       tableBody.innerHTML =
         '<tr><td colspan="6">No achievements found</td></tr>';
@@ -209,7 +180,6 @@ async function loadAchievementsTable() {
     // Add achievements to the table
     achievements.forEach((achievement) => {
       const row = document.createElement('tr');
-
       row.innerHTML = `
         <td>${achievement.achievement_id}</td>
         <td>${achievement.name}</td>
@@ -221,7 +191,6 @@ async function loadAchievementsTable() {
           <button class="delete-btn" data-achievement-id="${achievement.achievement_id}">Delete</button>
         </td>
       `;
-
       tableBody.appendChild(row);
     });
 
@@ -247,7 +216,6 @@ async function loadAchievementsTable() {
   }
 }
 
-// Function to setup the user modal
 function setupUserModal() {
   const modal = document.getElementById('user-modal');
   const closeBtn = document.getElementById('close-user-modal');
@@ -277,13 +245,11 @@ function setupUserModal() {
       await changeUserRole('admin');
     });
   }
-
   if (removeAdminBtn) {
     removeAdminBtn.addEventListener('click', async () => {
       await changeUserRole('regular');
     });
   }
-
   if (deleteUserBtn) {
     deleteUserBtn.addEventListener('click', async () => {
       await deleteUser();
@@ -291,7 +257,6 @@ function setupUserModal() {
   }
 }
 
-// Function to open the user modal with user details
 async function openUserModal(userId) {
   const modal = document.getElementById('user-modal');
   const content = document.getElementById('user-details-content');
@@ -312,20 +277,17 @@ async function openUserModal(userId) {
     const response = await fetch(
       `http://localhost:3000/api/admin/users/${userId}`,
     );
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const user = await response.json();
-
     // Format the dates
     const createdDate = new Date(user.created_at).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
-
     // Create user details HTML
     let detailsHTML = `
       <div class="detail-section">
@@ -374,7 +336,6 @@ async function openUserModal(userId) {
         <h3>User Achievements</h3>
         <div class="achievements-list">
       `;
-
       user.achievements.forEach((achievement) => {
         const earnedDate = new Date(achievement.earned_at).toLocaleDateString(
           'en-US',
@@ -384,7 +345,6 @@ async function openUserModal(userId) {
             day: 'numeric',
           },
         );
-
         detailsHTML += `
           <div class="achievement-item">
             <div class="achievement-header">
@@ -395,7 +355,6 @@ async function openUserModal(userId) {
           </div>
         `;
       });
-
       detailsHTML += '</div>';
     } else {
       detailsHTML += '<p>No achievements earned yet.</p>';
@@ -409,7 +368,6 @@ async function openUserModal(userId) {
   }
 }
 
-// Function to change user role
 async function changeUserRole(role) {
   const modal = document.getElementById('user-modal');
   if (!modal) return;
@@ -439,7 +397,6 @@ async function changeUserRole(role) {
           `Failed to change role. Status: ${response.status}`,
       );
     }
-
     alert(`User role successfully changed to ${role}`);
 
     // Refresh user details and users table
@@ -451,7 +408,6 @@ async function changeUserRole(role) {
   }
 }
 
-// Function to delete a user
 async function deleteUser() {
   const modal = document.getElementById('user-modal');
   if (!modal) return;
@@ -463,11 +419,7 @@ async function deleteUser() {
   }
 
   // Confirm deletion
-  if (
-    !confirm(
-      'Are you sure you want to delete this user? This action cannot be undone.',
-    )
-  ) {
+  if (!confirm('Are you sure you want to delete this user? This action cannot be undone.',)) {
     return;
   }
 
@@ -478,7 +430,6 @@ async function deleteUser() {
         method: 'DELETE',
       },
     );
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
@@ -486,21 +437,20 @@ async function deleteUser() {
           `Failed to delete user. Status: ${response.status}`,
       );
     }
-
     alert('User deleted successfully');
 
-    // Close modal and refresh users table
+    // Close modal and refresh users and system statistics
     modal.style.display = 'none';
     document.body.style.overflow = '';
     loadUsersTable();
-    loadSystemStats(); // Refresh stats as well
+    loadSystemStats();
   } catch (error) {
     console.error('Error deleting user:', error);
     alert(`Error: ${error.message}`);
   }
 }
 
-// Function to setup the achievement modal
+// Function to initialize the achievement management modal
 function setupAchievementModal() {
   const modal = document.getElementById('achievement-modal');
   const closeBtn = document.getElementById('close-achievement-modal');
@@ -510,28 +460,23 @@ function setupAchievementModal() {
 
   if (!modal || !closeBtn || !form) return;
 
-  // Button to open the modal for new achievement
+// tarviiiko if-lausetta?
   if (addBtn) {
     addBtn.addEventListener('click', () => {
       openAchievementModal();
     });
   }
-
-  // Close button event
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     document.body.style.overflow = '';
   });
-
-  // Cancel button event
+  // ??? tarviiko if-lausetta?
   if (cancelBtn) {
     cancelBtn.addEventListener('click', () => {
       modal.style.display = 'none';
       document.body.style.overflow = '';
     });
   }
-
-  // Close modal when clicking outside of it
   window.addEventListener('click', (event) => {
     if (event.target === modal) {
       modal.style.display = 'none';
@@ -545,13 +490,9 @@ function setupAchievementModal() {
 
     const achievementId = document.getElementById('achievement-id').value;
     const name = document.getElementById('achievement-name').value;
-    const description = document.getElementById(
-      'achievement-description',
-    ).value;
+    const description = document.getElementById('achievement-description',).value;
     const experience = document.getElementById('achievement-xp').value;
-    const requirement = document.getElementById(
-      'achievement-requirement',
-    ).value;
+    const requirement = document.getElementById('achievement-requirement',).value;
 
     const achievementData = {
       name,
@@ -559,23 +500,19 @@ function setupAchievementModal() {
       experience_points: experience,
       requirement,
     };
-
     if (achievementId) {
-      // Update existing achievement
       await updateAchievement(achievementId, achievementData);
     } else {
-      // Create new achievement
       await createAchievement(achievementData);
     }
   });
 }
 
-// Function to open achievement modal for creating/editing
+// Function to open the achievement management modal
 async function openAchievementModal(achievementId = null) {
   const modal = document.getElementById('achievement-modal');
   const form = document.getElementById('achievement-form');
   const title = document.getElementById('achievement-form-title');
-
   const idInput = document.getElementById('achievement-id');
   const nameInput = document.getElementById('achievement-name');
   const descInput = document.getElementById('achievement-description');
@@ -584,26 +521,19 @@ async function openAchievementModal(achievementId = null) {
 
   if (!modal || !form || !title) return;
 
-  // Reset form
   form.reset();
 
-  // Set title and prepare form for create/edit
+  // Set title and prepare form for management
   if (achievementId) {
     title.textContent = 'Edit Achievement';
-
     try {
-      // Fetch achievement details
       const response = await fetch(
         `http://localhost:3000/api/achievements/${achievementId}`,
       );
-
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
       const achievement = await response.json();
-
-      // Populate form with achievement data
       idInput.value = achievement.id;
       nameInput.value = achievement.name;
       descInput.value = achievement.description;
@@ -619,12 +549,10 @@ async function openAchievementModal(achievementId = null) {
     idInput.value = '';
   }
 
-  // Show modal
   modal.style.display = 'block';
-  document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+  document.body.style.overflow = 'hidden';
 }
 
-// Function to create a new achievement
 async function createAchievement(achievementData) {
   try {
     const response = await fetch('http://localhost:3000/api/achievements', {
@@ -634,7 +562,6 @@ async function createAchievement(achievementData) {
       },
       body: JSON.stringify(achievementData),
     });
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
@@ -655,7 +582,6 @@ async function createAchievement(achievementData) {
   }
 }
 
-// Function to update an achievement
 async function updateAchievement(achievementId, achievementData) {
   try {
     const response = await fetch(
@@ -668,7 +594,6 @@ async function updateAchievement(achievementId, achievementData) {
         body: JSON.stringify(achievementData),
       },
     );
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
@@ -689,9 +614,7 @@ async function updateAchievement(achievementId, achievementData) {
   }
 }
 
-// Function to delete an achievement
 async function deleteAchievement(achievementId) {
-  // Confirm deletion
   if (!confirm('Are you sure you want to delete this achievement?')) {
     return;
   }
@@ -703,7 +626,6 @@ async function deleteAchievement(achievementId) {
         method: 'DELETE',
       },
     );
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(
@@ -714,9 +636,9 @@ async function deleteAchievement(achievementId) {
 
     alert('Achievement deleted successfully');
 
-    // Refresh achievements table
+    // Refresh achievements table and system statistics
     loadAchievementsTable();
-    loadSystemStats(); // Refresh stats
+    loadSystemStats();
   } catch (error) {
     console.error('Error deleting achievement:', error);
     alert(`Error: ${error.message}`);

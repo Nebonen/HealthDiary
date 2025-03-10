@@ -38,10 +38,9 @@ async function displayUserProfile() {
       createdElement.textContent = 'Unknown';
     }
 
-    // Set avatar initials
+    // Set default profile picture with initials
     const avatarInitials = document.getElementById('avatar-initials');
     if (avatarInitials && userData.username) {
-      // Get initials from username (first letter of each word)
       const initials = userData.username
         .split(' ')
         .map((name) => name[0])
@@ -59,14 +58,11 @@ async function displayUserProfile() {
 // Function to fetch and display user achievements
 async function fetchAndDisplayAchievements() {
   try {
-    const achievementsContainer = document.getElementById(
-      'achievements-container',
-    );
+    const achievementsContainer = document.getElementById('achievements-container',);
     if (!achievementsContainer) return;
 
     // Show loading state
-    achievementsContainer.innerHTML =
-      '<p class="loading">Loading achievements...</p>';
+    achievementsContainer.innerHTML = '<p class="loading">Loading achievements...</p>';
 
     // Fetch both user achievements and all available achievements in parallel
     const [userResponse, allResponse] = await Promise.all([
@@ -127,7 +123,7 @@ async function fetchAndDisplayAchievements() {
         "You haven't unlocked any achievements yet.";
       achievementsContainer.appendChild(noAchievementsMsg);
 
-      // Add some space before locked achievements
+      // Add some space between locked and unlocked achievements
       const spacer = document.createElement('div');
       spacer.style.height = '1.5rem';
       achievementsContainer.appendChild(spacer);
@@ -145,7 +141,7 @@ async function fetchAndDisplayAchievements() {
     lockedTitle.textContent = 'Locked Achievements';
     achievementsContainer.appendChild(lockedTitle);
 
-    // Display each locked achievement or a message if all are unlocked
+    // Display each locked achievement
     if (lockedAchievements.length > 0) {
       lockedAchievements.forEach((achievement) => {
         const achievementItem = document.createElement('div');
@@ -163,7 +159,7 @@ async function fetchAndDisplayAchievements() {
         achievementsContainer.appendChild(achievementItem);
       });
     } else {
-      // Message if all achievements are unlocked
+      // Display a message if all achievements are unlocked
       const allUnlockedMsg = document.createElement('p');
       allUnlockedMsg.textContent =
         "Congratulations! You've unlocked all available achievements.";
@@ -180,6 +176,7 @@ async function fetchAndDisplayAchievements() {
   }
 }
 
+// Function to initialize the delete account button
 async function setupDeleteAccountButton() {
   const deleteAccountBtn = document.getElementById('delete-account-btn');
   if (!deleteAccountBtn) return;
@@ -234,14 +231,12 @@ async function setupDeleteAccountButton() {
         confirmDeleteBtn.disabled = true;
         confirmDeleteBtn.textContent = 'Deleting...';
 
-        // Send delete request to the API
         const response = await fetch(
           'http://localhost:3000/api/users/profile',
           {
             method: 'DELETE',
           },
         );
-
         if (!response.ok) {
           const data = await response.json();
           throw new Error(data.message || 'Failed to delete account');
@@ -259,7 +254,7 @@ async function setupDeleteAccountButton() {
           <p>Redirecting to login page...</p>
         `;
 
-        // Redirect after a brief delay
+        // Redirect to login page after 2 seconds
         setTimeout(() => {
           window.location.href = '/src/pages/login.html';
         }, 2000);
@@ -305,7 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const isAuthenticated = checkAuthentication();
 
     if (!isAuthenticated) {
-      return; // The checkAuthentication function will handle redirection
+      return; // checkAuthentication function will handle redirection
     }
 
     // Validate token
@@ -317,19 +312,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       logoutBtn.addEventListener('click', logout);
     }
 
-    // Display user profile info
     await displayUserProfile();
-
-    // Display user stats (reuse function from index.js)
     fetchAndDisplayUserStats();
-
-    // Display achievements
     fetchAndDisplayAchievements();
-
     setupDeleteAccountButton();
 
-    // Note: For the charts, you would need to add Chart.js to your dependencies
-    // This is a placeholder for that functionality
   } catch (error) {
     console.error('Error initializing profile page:', error);
   }

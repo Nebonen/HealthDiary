@@ -1,6 +1,3 @@
-/**
- * Fetch user statistics and update the UI
- */
 async function fetchAndDisplayUserStats() {
   try {
     // Get the UI elements that need to be updated
@@ -8,8 +5,6 @@ async function fetchAndDisplayUserStats() {
     const levelLabel = document.querySelector('.level-label');
     const progressFill = document.querySelector('.progress-fill');
     const progressText = document.querySelector('.progress-text');
-
-    // These selectors work with the updated HTML structure
     const totalEntriesElement = document.getElementById('total-entries');
     const currentStreakElement = document.getElementById('current-streak');
     const bestStreakElement = document.getElementById('best-streak');
@@ -26,15 +21,10 @@ async function fetchAndDisplayUserStats() {
 
     // If we need more detailed stats, fetch from the API
     if (!userData.total_entries || !userData.current_streak) {
-      // Fetch user data from the backend
       const response = await fetch('http://localhost:3000/api/users/profile');
-
-      // Check if the request was successful
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      // Parse the JSON response
       userData = await response.json();
 
       // Update cached userData
@@ -60,7 +50,7 @@ async function fetchAndDisplayUserStats() {
       if (progressText)
         progressText.textContent = `${experience} / ${experienceToNextLevel} XP to next level`;
 
-      // Update activity stats
+      // Update streak stats
       if (totalEntriesElement)
         totalEntriesElement.textContent = userData.total_entries || 0;
       if (currentStreakElement)
@@ -95,7 +85,6 @@ async function fetchAndDisplayUserStats() {
 
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Fetch user stats (level, experience, streaks)
   fetchAndDisplayUserStats();
 });
 

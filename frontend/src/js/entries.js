@@ -1,9 +1,8 @@
 import fetchAndDisplayUserStats from './user.js';
 
-// Function to fetch entries from the backend and display them
+// Function to fetch all entries from the backend and display them
 async function fetchAndDisplayEntries() {
   try {
-    // Get the container where entries will be displayed
     const entriesContainer = document.getElementById('all-entries');
 
     if (!entriesContainer) {
@@ -18,15 +17,11 @@ async function fetchAndDisplayEntries() {
     entriesContainer.innerHTML =
       '<div class="loading">Loading entries...</div>';
 
-    // Fetch entries from the backend
     const response = await fetch('http://localhost:3000/api/entries');
 
-    // Check if the request was successful
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
-    // Parse the JSON response
     const entries = await response.json();
 
     // Clear the loading indicator
@@ -39,23 +34,21 @@ async function fetchAndDisplayEntries() {
       return;
     }
 
+    // Toimii ehkä väärin?
     // Sort entries by date (newest first)
     entries.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     // Create a div for each entry
     entries.forEach((entry) => {
-      // Create the entry item container
       const entryItem = document.createElement('div');
       entryItem.className = 'entry-item';
 
-      // Create the entry header
       const entryHeader = document.createElement('div');
       entryHeader.className = 'entry-header';
 
-      // Format the date
       const entryDate = document.createElement('span');
       entryDate.className = 'entry-date';
-      // Convert the date to a readable format
+
       const date = new Date(entry.date);
       entryDate.textContent = date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -63,32 +56,26 @@ async function fetchAndDisplayEntries() {
         day: 'numeric',
       });
 
-      // Add the mood
       const entryMood = document.createElement('span');
       entryMood.className = 'entry-mood';
       entryMood.textContent = entry.mood;
 
-      // Add date and mood to the header
       entryHeader.appendChild(entryDate);
       entryHeader.appendChild(entryMood);
 
-      // Create the stats section (weight and sleep)
       const entryStats = document.createElement('p');
       entryStats.className = 'entry-stats';
 
-      // Build the stats text with conditional rendering
       let statsText = '';
       if (entry.weight) statsText += `Weight: ${entry.weight} kg`;
       if (entry.weight && entry.sleep) statsText += ' | ';
       if (entry.sleep) statsText += `Sleep: ${entry.sleep} hrs`;
       entryStats.textContent = statsText;
 
-      // Create the notes section
       const entryNotes = document.createElement('p');
       entryNotes.className = 'entry-notes';
       entryNotes.textContent = entry.notes || 'No notes for this entry.';
 
-      // Create actions section with edit and delete buttons
       const entryActions = document.createElement('div');
       entryActions.className = 'entry-actions';
 
@@ -105,16 +92,12 @@ async function fetchAndDisplayEntries() {
       entryActions.appendChild(editButton);
       entryActions.appendChild(deleteButton);
 
-      // Assemble the entry item
       entryItem.appendChild(entryHeader);
       entryItem.appendChild(entryStats);
       entryItem.appendChild(entryNotes);
       entryItem.appendChild(entryActions);
-
-      // Add the entry to the container
       entriesContainer.appendChild(entryItem);
 
-      // Add event listeners for edit and delete buttons
       editButton.addEventListener('click', () => editEntry(entry.id));
       deleteButton.addEventListener('click', () => deleteEntry(entry.id));
     });
@@ -130,9 +113,8 @@ async function fetchAndDisplayEntries() {
 // Function to fetch and display only the 2 most recent entries
 async function fetchAndDisplayRecentEntries() {
   try {
-    // Get the container where recent entries will be displayed
     const recentEntriesContainer = document.getElementById('recent-entries');
-
+    
     if (!recentEntriesContainer) {
       console.error('Recent entries container not found');
       return;
@@ -153,7 +135,7 @@ async function fetchAndDisplayRecentEntries() {
       return;
     }
 
-    // Fetch entries from the backend (the fetch override will add auth header)
+    // (The fetch override will add auth header)
     const response = await fetch('http://localhost:3000/api/entries');
 
     // Check if the request was successful
@@ -161,7 +143,6 @@ async function fetchAndDisplayRecentEntries() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    // Parse the JSON response
     const entries = await response.json();
 
     // Clear the loading indicator
@@ -174,6 +155,7 @@ async function fetchAndDisplayRecentEntries() {
       return;
     }
 
+    // Ehkä toimii väärin??
     // Sort entries by date (newest first)
     entries.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -182,18 +164,14 @@ async function fetchAndDisplayRecentEntries() {
 
     // Create a div for each recent entry
     recentEntries.forEach((entry) => {
-      // Create the entry item container
       const entryItem = document.createElement('div');
       entryItem.className = 'entry-item';
 
-      // Create the entry header
       const entryHeader = document.createElement('div');
       entryHeader.className = 'entry-header';
 
-      // Format the date
       const entryDate = document.createElement('span');
       entryDate.className = 'entry-date';
-      // Convert the date to a readable format
       const date = new Date(entry.date);
       entryDate.textContent = date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -201,20 +179,16 @@ async function fetchAndDisplayRecentEntries() {
         day: 'numeric',
       });
 
-      // Add the mood
       const entryMood = document.createElement('span');
       entryMood.className = 'entry-mood';
       entryMood.textContent = entry.mood;
 
-      // Add date and mood to the header
       entryHeader.appendChild(entryDate);
       entryHeader.appendChild(entryMood);
 
-      // Create the stats section (weight and sleep)
       const entryStats = document.createElement('p');
       entryStats.className = 'entry-stats';
 
-      // Build the stats text with conditional rendering
       let statsText = '';
       if (entry.weight) statsText += `Weight: ${entry.weight} kg`;
       if (entry.weight && entry.sleep) statsText += ' | ';
@@ -222,17 +196,13 @@ async function fetchAndDisplayRecentEntries() {
 
       entryStats.textContent = statsText || 'No stats recorded';
 
-      // Create the notes section
       const entryNotes = document.createElement('p');
       entryNotes.className = 'entry-notes';
       entryNotes.textContent = entry.notes || 'No notes for this entry.';
 
-      // Assemble the entry item
       entryItem.appendChild(entryHeader);
       entryItem.appendChild(entryStats);
       entryItem.appendChild(entryNotes);
-
-      // Add the entry to the container
       recentEntriesContainer.appendChild(entryItem);
     });
   } catch (error) {
@@ -244,10 +214,8 @@ async function fetchAndDisplayRecentEntries() {
   }
 }
 
-// Function to edit an entry
 async function editEntry(entryId) {
   try {
-    // Get the form elements
     const diaryForm = document.getElementById('diary-form');
     const dateInput = document.getElementById('entry-date');
     const moodInput = document.getElementById('mood');
@@ -259,18 +227,14 @@ async function editEntry(entryId) {
     // Change the form submission button text
     if (submitButton) submitButton.textContent = 'Update Entry';
 
-    // Fetch the entry details from the backend
     const response = await fetch(
       `http://localhost:3000/api/entries/${entryId}`,
     );
-
     if (!response.ok) {
       throw new Error(`Failed to fetch entry details: ${response.statusText}`);
     }
-
     const entry = await response.json();
 
-    // Populate the form with the entry details
     dateInput.value = new Date(entry.date).toISOString().split('T')[0];
     moodInput.value = entry.mood || '';
     weightInput.value = entry.weight || '';
@@ -288,7 +252,6 @@ async function editEntry(entryId) {
       if (submitButton) submitButton.disabled = true;
 
       try {
-        // Send PUT request to update the entry
         const updateResponse = await fetch(
           `http://localhost:3000/api/entries/${entryId}`,
           {
@@ -339,7 +302,6 @@ async function editEntry(entryId) {
   }
 }
 
-// Function to delete an entry
 async function deleteEntry(entryId) {
   if (!confirm('Are you sure you want to delete this entry?')) {
     return;
@@ -361,7 +323,6 @@ async function deleteEntry(entryId) {
         },
       },
     );
-
     if (!response.ok) {
       throw new Error(`Failed to delete entry: ${response.statusText}`);
     }
@@ -379,7 +340,7 @@ async function deleteEntry(entryId) {
   }
 }
 
-// Update the setupDiaryForm function to prevent double submission
+// Function to set up the diary submission form
 function setupDiaryForm() {
   const diaryForm = document.getElementById('diary-form');
   if (!diaryForm) return;
@@ -434,10 +395,8 @@ function setupDiaryForm() {
 
       const data = await response.json();
 
-      // Show success message with non-blocking UI
       const successInfo = createStatusMessage('success');
 
-      // Build success message content
       let messageContent = '<strong>Entry created successfully!</strong>';
 
       // Add achievement information if available
@@ -479,7 +438,7 @@ function setupDiaryForm() {
         }
       }
 
-      // Automatically remove success message after 5 seconds
+      // Remove success message after 5 seconds
       setTimeout(() => {
         if (successInfo && successInfo.parentNode) {
           successInfo.remove();
@@ -493,7 +452,7 @@ function setupDiaryForm() {
       errorInfo.innerHTML = `<strong>Error:</strong> ${error.message}`;
       diaryForm.appendChild(errorInfo);
 
-      // Automatically remove error message after 5 seconds
+      // Remove error message after 5 seconds
       setTimeout(() => {
         if (errorInfo && errorInfo.parentNode) {
           errorInfo.remove();
@@ -530,7 +489,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupDiaryForm();
   fetchAndDisplayRecentEntries();
 
-  // If you're on a page with the entries modal
   const openEntriesModalBtn = document.getElementById('open-entries-modal');
   if (openEntriesModalBtn) {
     openEntriesModalBtn.addEventListener('click', fetchAndDisplayEntries);
