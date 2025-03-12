@@ -22,7 +22,7 @@ A school project
 
 ## API Documentation
 
-[apidoc](localhost:3000/api)
+[apidoc](https://users.metropolia.fi/~miskanu/Web-sovelluskehitys/docs/)
 
 ## Database
 
@@ -89,9 +89,3 @@ Achievements ||--|| UserAchievement : "has"
 For help and problems with code, I used Claude 3.7 Sonnet and GitHub Copilot.
 
 [color pallette](https://colorhunt.co/palette/22283131363f76abaeeeeeee)
-
-## Other stuff
-
-Admin dashboard is accessible from URL only. (http://localhost:5173/src/pages/admin.html)
-
-Both frontend and backend have separate node_modules -folders, so you need to cd in to their respective directories and then install.
