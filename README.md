@@ -89,3 +89,7 @@ Achievements ||--|| UserAchievement : "has"
 For help and problems with code, I used Claude 3.7 Sonnet and GitHub Copilot.
 
 [color pallette](https://colorhunt.co/palette/22283131363f76abaeeeeeee)
+
+## Tests
+
+[Documentation](tests/README.md)
