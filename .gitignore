@@ -32,3 +32,4 @@ Thumbs.db
 # misc
 docs/
 .venv
+keywords.robot
