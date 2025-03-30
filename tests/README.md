@@ -122,3 +122,76 @@ robot case-2.robot
 ```
 
 ![Case2](../images/case2.png)
+
+## Case 4. Make a new diary entry
+
+```robotframework
+*** Settings ***
+Library     Browser    auto_closing_level=KEEP
+Resource    ../Keywords.robot
+```
+
+- `Browser` library is loaded with the `auto_closing_level=KEEP` parameter, which keeps the browser open aftet test exection
+- `Keywords.robot` resource file is loaded, which contains the variables needed for login (email and password)
+
+```robotframework
+*** Test Cases ***
+Make a new diary entry
+    New Browser    chromium    headless=No
+    New Page    http://localhost:5173
+```
+
+- Opens a new Chromium browser in visible mode (not headless)
+- Navigates to the HealthDiary URL through localhost
+
+```robotframework
+# Get the page title and check that it is as expected
+${PageTitle}=  Get Title
+Should Be Equal As Strings    ${PageTitle}    Daily Tracker - Login
+```
+
+- Retrieves the page title and verifies it is "Daily Tracker - Login"
+
+```robotframework
+# Write the username and password
+Type Text    id=login-email    ${email}
+Type Secret  id=login-password    $password
+
+# Get the element for the login button and click it
+${login}=    Get Element    xpath=//button[@class="auth-btn" and text()="Login"]
+Click    ${login}
+```
+
+- Enters the email and password from the `Keywords.robot` resource file.
+- Finds the login button with the specific XPath and clicks it.
+
+```robotframework
+# Get the 'great' value from the mood dropdown
+Select Options By    id=mood    value    great
+
+# Write the weight, sleep and notes
+Type Text    id=weight    70
+Type Text    id=sleep    8
+Type Text    id=notes    This is a test note.
+```
+
+- Selects "great" from the mood dropdown.
+- Enters values for weight (70), sleep hours (8) and adds a note.
+
+```robotframework
+# Get the element for the submit button and click it
+${submit}=    Get Element    xpath=//button[@type="submit" and text()="Save Entry"]
+Click    ${submit}
+```
+
+- Finds the save button with specific XPath and clicks it to submit the diary entry
+
+And then run the test with command:
+
+```bash
+robot case-3.robot
+```
+
+![Case3](../images/case3.png)
+
+GitHub Copilot with Claude 3.7 Sonnet (preview) was used to write this documentation.
