@@ -192,6 +192,18 @@ And then run the test with command:
 robot case-3.robot
 ```
 
-![Case3](../images/case3.png)
+![Case4](../images/case4.png)
 
 GitHub Copilot with Claude 3.7 Sonnet (preview) was used to write this documentation.
+
+### Case 5. HealthDiary login test using .env
+
+[case 5](../tests/front/case5)
+
+The test is exatly the same as it is in case 2 but the `EMAIL` and `PASSWORD` are loaded from a .env file with [load_env.py](../tests/load_env.py) and
+
+```robotframework
+Variables    ../load_env.py
+```
+
+![case5](../images/case5.png)

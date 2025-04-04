@@ -33,3 +33,4 @@ Thumbs.db
 docs/
 .venv
 keywords.robot
+__pycache__

@@ -1,0 +1,43 @@
+{"level":30,"time":"2025-04-04T12:22:05.394Z","pid":9580,"hostname":"Nebonen","msg":"Listening on 56373"}
+(node:9580) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-04-04T12:22:05.858Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-04-04T12:22:06.051Z","pid":9580,"hostname":"Nebonen","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-04-04T12:22:06.052Z","pid":9580,"hostname":"Nebonen","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-04-04T12:22:06.052Z","pid":9580,"hostname":"Nebonen","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-04-04T12:22:06.058Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-04-04T12:22:06.059Z","pid":9580,"hostname":"Nebonen","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-04-04T12:22:06.071Z","pid":9580,"hostname":"Nebonen","msg":"Changed active context"}
+{"level":30,"time":"2025-04-04T12:22:06.254Z","pid":9580,"hostname":"Nebonen","msg":"Video path: undefined"}
+{"level":30,"time":"2025-04-04T12:22:06.254Z","pid":9580,"hostname":"Nebonen","msg":"Changed active page"}
+{"level":30,"time":"2025-04-04T12:22:06.326Z","pid":9580,"hostname":"Nebonen","msg":"End of node method newPage"}
+{"level":30,"time":"2025-04-04T12:22:06.339Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method typeText"}
+{"level":30,"time":"2025-04-04T12:22:06.339Z","pid":9580,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=login-email in page."}
+{"level":30,"time":"2025-04-04T12:22:06.469Z","pid":9580,"hostname":"Nebonen","msg":"End of node method typeText"}
+{"level":30,"time":"2025-04-04T12:22:06.472Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method typeText"}
+{"level":30,"time":"2025-04-04T12:22:06.472Z","pid":9580,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=login-password in page."}
+{"level":30,"time":"2025-04-04T12:22:06.498Z","pid":9580,"hostname":"Nebonen","msg":"End of node method typeText"}
+{"level":30,"time":"2025-04-04T12:22:06.501Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method getElement"}
+{"level":30,"time":"2025-04-04T12:22:06.502Z","pid":9580,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//button[@class=\"auth-btn\" and text()=\"Login\"] in page."}
+{"level":30,"time":"2025-04-04T12:22:06.505Z","pid":9580,"hostname":"Nebonen","msg":"End of node method getElement"}
+{"level":30,"time":"2025-04-04T12:22:06.508Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method click"}
+{"level":30,"time":"2025-04-04T12:22:06.509Z","pid":9580,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//button[@class=\"auth-btn\" and text()=\"Login\"] in page."}
+{"level":30,"time":"2025-04-04T12:22:06.579Z","pid":9580,"hostname":"Nebonen","msg":"End of node method click"}
+{"level":30,"time":"2025-04-04T12:22:06.585Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.587Z","pid":9580,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.589Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.590Z","pid":9580,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.592Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.593Z","pid":9580,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.596Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.598Z","pid":9580,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.601Z","pid":9580,"hostname":"Nebonen","msg":"Changed active context"}
+{"level":30,"time":"2025-04-04T12:22:06.601Z","pid":9580,"hostname":"Nebonen","msg":"Changing current active page: page=b179fb56-433e-498e-b4c7-8b05f3d7f9c4"}
+{"level":30,"time":"2025-04-04T12:22:06.601Z","pid":9580,"hostname":"Nebonen","msg":"Changed active page"}
+{"level":30,"time":"2025-04-04T12:22:06.604Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method closeContext"}
+{"level":30,"time":"2025-04-04T12:22:06.613Z","pid":9580,"hostname":"Nebonen","msg":"Removed page=df2cf2ba-8250-4352-b2f4-6110c3177554 from context=4f6c2d28-53e1-4d36-b7c0-2af5ae52fefa page stack"}
+{"level":30,"time":"2025-04-04T12:22:06.645Z","pid":9580,"hostname":"Nebonen","msg":"End of node method closeContext"}
+{"level":30,"time":"2025-04-04T12:22:06.650Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.650Z","pid":9580,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-04T12:22:06.692Z","pid":9580,"hostname":"Nebonen","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2025-04-04T12:22:06.814Z","pid":9580,"hostname":"Nebonen","msg":"End of node method closeAllBrowsers"}
