@@ -207,3 +207,11 @@ Variables    ../load_env.py
 ```
 
 ![case5](../images/case5.png)
+
+### Case 6. HealthDiary login test using CryptoLibrary
+
+[case 6](../tests/front/case6/)
+
+The test is exatly the same as it is in case 2 but the `EMAIL` and `PASSWORD` are crypted using [CryptoLibrary](https://pypi.org/project/robotframework-crypto/)
+
+![case6](../images/case6.png)

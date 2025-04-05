@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.1 on win32)" generated="2025-04-05T14:26:44.363329" rpa="false" schemaversion="5">
+<suite id="s1" name="Case-6" source="C:\Users\miska\HealthDiary\tests\front\case6\case-6.robot">
+<test id="s1-t1" name="Login to HealthDiary with CryptoLibrary" line="11">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-04-05T14:26:45.068970" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\miska\\HealthDiary\\tests\\front\\case6\\browser\\traces\\temp\\418acac7-7d1d-47e1-8c86-2a20b55c237b"}</msg>
+<msg time="2025-04-05T14:26:45.095489" level="INFO">Starting Browser process C:\Users\miska\AppData\Local\Programs\Python\Python312\Lib\site-packages\Browser\wrapper\index.js using port 61090</msg>
+<msg time="2025-04-05T14:26:45.095489" level="INFO">Node startup parameters: ['node', 'C:\\Users\\miska\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\Browser\\wrapper\\index.js', '61090']</msg>
+<msg time="2025-04-05T14:26:46.365445" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\miska\\HealthDiary\\tests\\front\\case6\\browser\\traces\\temp\\418acac7-7d1d-47e1-8c86-2a20b55c237b"}</msg>
+<arg>chromium</arg>
+<arg>headless=No</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-04-05T14:26:45.068471" elapsed="1.297980"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-04-05T14:26:46.630212" level="INFO">Successfully initialized new page object and opened url: http://localhost:5173</msg>
+<msg time="2025-04-05T14:26:46.630212" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>http://localhost:5173</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-04-05T14:26:46.366959" elapsed="0.263753"/>
+</kw>
+<kw name="Get Title" owner="Browser">
+<msg time="2025-04-05T14:26:46.637729" level="INFO">Title: 'Daily Tracker - Login'</msg>
+<msg time="2025-04-05T14:26:46.637729" level="INFO">${PageTitle} = Daily Tracker - Login</msg>
+<var>${PageTitle}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-05T14:26:46.630712" elapsed="0.007017"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${PageTitle}</arg>
+<arg>Daily Tracker - Login</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-04-05T14:26:46.638232" elapsed="0.000500"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2025-04-05T14:26:46.639232" level="INFO">Types the text '***' in the given field.</msg>
+<arg>id=login-email</arg>
+<arg>${EMAIL}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-05T14:26:46.638732" elapsed="0.138418"/>
+</kw>
+<kw name="Type Secret" owner="Browser">
+<arg>id=login-password</arg>
+<arg>$PASSWORD</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given secret from ``variable_name`` into the text field
+found by ``selector``.</doc>
+<status status="PASS" start="2025-04-05T14:26:46.777650" elapsed="0.029548"/>
+</kw>
+<kw name="Get Element" owner="Browser">
+<msg time="2025-04-05T14:26:46.814710" level="INFO">Locator found successfully.</msg>
+<msg time="2025-04-05T14:26:46.815208" level="INFO">${login} = xpath=//button[@class="auth-btn" and text()="Login"]</msg>
+<var>${login}</var>
+<arg>xpath=//button[@class="auth-btn" and text()="Login"]</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns a reference to a Playwright [https://playwright.dev/docs/api/class-locator|Locator].</doc>
+<status status="PASS" start="2025-04-05T14:26:46.807701" elapsed="0.007507"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-04-05T14:26:46.816214" level="INFO">Clicks the element 'xpath=//button[@class="auth-btn" and text()="Login"]'.</msg>
+<arg>${login}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-05T14:26:46.815208" elapsed="0.115021"/>
+</kw>
+<msg time="2025-04-05T14:26:46.933730" level="INFO">Set timeout to: 10000</msg>
+<msg time="2025-04-05T14:26:46.944741" level="INFO">Switching context to context=5a9e7718-3447-4378-98cc-6a5bae0098a6 in CURRENT</msg>
+<msg time="2025-04-05T14:26:46.951840" level="INFO">Successfully changed active context: context=5a9e7718-3447-4378-98cc-6a5bae0098a6</msg>
+<msg time="2025-04-05T14:26:46.994419" level="INFO">Successfully closed Context</msg>
+<status status="PASS" start="2025-04-05T14:26:45.065450" elapsed="1.864779"/>
+</test>
+<status status="PASS" start="2025-04-05T14:26:44.364331" elapsed="2.631095"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Case-6" id="s1" pass="1" fail="0" skip="0">Case-6</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
