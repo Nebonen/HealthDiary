@@ -82,6 +82,8 @@ I tested the installation using [asennustesti.py](asennustesti.py)
 
 ## Case 2. HealthDiary login test
 
+[Case 2](../tests/front/case2/)
+
 ```robotframework
 *** Settings ***
 Library     Browser
@@ -123,7 +125,13 @@ robot case-2.robot
 
 ![Case2](../images/case2.png)
 
+[Case 2 logs](../tests/front/case2/log.html)
+
+[Case 2 report](../tests/front/case2/report.html)
+
 ## Case 4. Make a new diary entry
+
+[Case 4](../tests/front/case4/)
 
 ```robotframework
 *** Settings ***
@@ -194,9 +202,13 @@ robot case-3.robot
 
 ![Case4](../images/case4.png)
 
+[Case 4 logs](../tests/front/case4/log.html)
+
+[Case 4 report](../tests/front/case4/report.html)
+
 GitHub Copilot with Claude 3.7 Sonnet (preview) was used to write this documentation.
 
-### Case 5. HealthDiary login test using .env
+## Case 5. HealthDiary login test using .env
 
 [case 5](../tests/front/case5)
 
@@ -208,10 +220,28 @@ Variables    ../load_env.py
 
 ![case5](../images/case5.png)
 
-### Case 6. HealthDiary login test using CryptoLibrary
+[Case 5 logs](../tests/front/case5/log.html)
+
+[Case 5 report](../tests/front/case5/report.html)
+
+## Case 6. HealthDiary login test using CryptoLibrary
 
 [case 6](../tests/front/case6/)
 
 The test is exatly the same as it is in case 2 but the `EMAIL` and `PASSWORD` are crypted using [CryptoLibrary](https://pypi.org/project/robotframework-crypto/)
 
 ![case6](../images/case6.png)
+
+[Case 6 logs](../tests/front/case6/log.html)
+
+[Case 6 report](../tests/front/case6/report.html)
+
+## Case 7. Test log and report files to outputs/ -folder
+
+Due to my filestructure, there is no need for a separate outputs/ -folder.
+
+## Case 8. Make a GitHub.io page for test logs and reports
+
+I set up the GitHub.io page from my repository settings, under the 'pages' -section.
+
+Documentations are updated to include links to their respective log and report files.
