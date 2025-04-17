@@ -20,11 +20,12 @@ Authenticate as Admin
     Set Suite Variable    ${token}
 
 *** Test Cases ***
-Get diary entries
+Get all users
     [Documentation]  Haetaan käyttäjän päiväkirjamerkinnät
     ...              - Kirjaudutaan sisään ylläpitäjän oikeuksilla
-    ...              - Haetaan käyttäjän päiväkirjamerkinnät
+    ...              - Haetaan kaikki käyttäjät
     ...              - Palautteena tuleva JSON-rakenne tulostetaan lokitiedostoon
-    ${response}    GET    url=http://localhost:3000/api/entries    headers=Authorization: Bearer ${token}
+    ${headers}    Create Dictionary    Authorization=Bearer ${token}
+    ${response}    GET    url=http://localhost:3000/api/admin/users  headers=${headers}
     Status Should Be    200
     Log List   ${response.json()}

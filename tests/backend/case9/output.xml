@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.11.5 on darwin)" generated="2025-04-14T10:42:21.773833" rpa="false" schemaversion="5">
-<suite id="s1" name="Case-9" source="/Users/miskan/HealthDiary/tests/backend/case9/case-9.robot">
+<robot generator="Robot 7.2.2 (Python 3.12.1 on win32)" generated="2025-04-17T15:26:00.477074" rpa="false" schemaversion="5">
+<suite id="s1" name="Case-9" source="C:\Users\miska\HealthDiary\tests\backend\case9\case-9.robot">
 <kw name="Authenticate as Admin" type="SETUP">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-04-14T10:42:21.835914" level="INFO">${body} = {'email': 'admin@healthdiary.com', 'password': 'admin123'}</msg>
+<msg time="2025-04-17T15:26:00.869322" level="INFO">${body} = {'email': 'admin@healthdiary.com', 'password': 'admin123'}</msg>
 <var>${body}</var>
 <arg>email=admin@healthdiary.com</arg>
 <arg>password=admin123</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-04-14T10:42:21.835764" elapsed="0.000180"/>
+<status status="PASS" start="2025-04-17T15:26:00.869322" elapsed="0.000000"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2025-04-14T10:42:21.866456" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
+<msg time="2025-04-17T15:26:00.940588" level="INFO">POST Request : url=http://localhost:3000/api/auth/login 
  path_url=/api/auth/login 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '58', 'Content-Type': 'application/json'} 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '58', 'Content-Type': 'application/json'} 
  body=b'{"email": "admin@healthdiary.com", "password": "admin123"}' 
  </msg>
-<msg time="2025-04-14T10:42:21.866528" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
- status=500, reason=Internal Server Error 
- headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '70', 'ETag': 'W/"46-L8Kppau0BEIDYZsIBiht3K/lpkk"', 'Date': 'Mon, 14 Apr 2025 07:42:21 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
- body={"message":"Access denied for user 'miskan'@'localhost'","status":500} 
+<msg time="2025-04-17T15:26:00.940588" level="INFO">POST Response : url=http://localhost:3000/api/auth/login 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '370', 'ETag': 'W/"172-1dk8wuU1U2J+lR7FFVgXhG5v5ao"', 'Date': 'Thu, 17 Apr 2025 12:26:00 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"message":"Login successful","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGscDqd-ulBiDqj_XjvkNFdl4gYwZ2tkS4UUZNhZI","user":{"userId":1,"username":"admin","email":"admin@healthdiary.com","level":1,"experience":30,"userLevel":"admin"}} 
  </msg>
-<msg time="2025-04-14T10:42:21.866608" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:3000/api/auth/login</msg>
+<msg time="2025-04-17T15:26:00.940588" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>url=http://localhost:3000/api/auth/login</arg>
 <arg>json=${body}</arg>
 <doc>Sends a POST request.</doc>
-<status status="FAIL" start="2025-04-14T10:42:21.836024" elapsed="0.031217">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:3000/api/auth/login</status>
+<status status="PASS" start="2025-04-17T15:26:00.869322" elapsed="0.071266"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
+<msg time="2025-04-17T15:26:00.941588" level="INFO">{'message': 'Login successful', 'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGscDqd-ulBiDqj_XjvkNFdl4gYwZ2tkS4UUZNhZI', 'user': {'userId': 1, 'username': 'admin', 'email': 'admin@healthdiary.com', 'level': 1, 'experience': 30, 'userLevel': 'admin'}}</msg>
 <arg>${response.json()}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-04-14T10:42:21.867340" elapsed="0.000015"/>
+<status status="PASS" start="2025-04-17T15:26:00.941089" elapsed="0.000499"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-04-17T15:26:00.941588" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGscDqd-ulBiDqj_XjvkNFdl4gYwZ...</msg>
 <var>${token}</var>
 <arg>${response.json()}[token]</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="NOT RUN" start="2025-04-14T10:42:21.867395" elapsed="0.000009"/>
+<status status="PASS" start="2025-04-17T15:26:00.941588" elapsed="0.000000"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
+<msg time="2025-04-17T15:26:00.942088" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGscDqd-ulBiDqj_XjvkNFdl4gYwZ2tkS4UUZNhZI</msg>
 <arg>${token}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2025-04-14T10:42:21.867437" elapsed="0.000007"/>
+<status status="PASS" start="2025-04-17T15:26:00.942088" elapsed="0.000000"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-04-17T15:26:00.942088" level="INFO">${token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGscDqd-ulBiDqj_XjvkNFdl4gYwZ...</msg>
 <arg>${token}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="NOT RUN" start="2025-04-14T10:42:21.867483" elapsed="0.000008"/>
+<status status="PASS" start="2025-04-17T15:26:00.942088" elapsed="0.000000"/>
 </kw>
 <doc>Kirjaudutaan sisään ylläpitäjän oikeuksilla.
 - Aluksi luodaan rakenne (Dictionary), joka sisältää käyttäjänimen ja salasanan
@@ -56,27 +60,63 @@
 - JSON rakenteesta kaivetaan esiin token
 - Token tulostetaan myös lokitiedostoon
 - Lopuksi token tallennetaa testijoukon muuttujiin muita kutsuja varten</doc>
-<status status="FAIL" start="2025-04-14T10:42:21.835474" elapsed="0.032072">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:3000/api/auth/login</status>
+<status status="PASS" start="2025-04-17T15:26:00.868824" elapsed="0.073264"/>
 </kw>
-<test id="s1-t1" name="Get diary entries" line="23">
+<test id="s1-t1" name="Get all users" line="23">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-04-17T15:26:00.943086" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGs...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-04-17T15:26:00.943086" elapsed="0.000000"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2025-04-17T15:26:00.947605" level="INFO">GET Request : url=http://localhost:3000/api/admin/users 
+ path_url=/api/admin/users 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AaGVhbHRoZGlhcnkuY29tIiwidXNlckxldmVsIjoiYWRtaW4iLCJpYXQiOjE3NDQ4OTI3NjAsImV4cCI6MTc0NDk3OTE2MH0.WtqGscDqd-ulBiDqj_XjvkNFdl4gYwZ2tkS4UUZNhZI'} 
+ body=None 
+ </msg>
+<msg time="2025-04-17T15:26:00.947605" level="INFO">GET Response : url=http://localhost:3000/api/admin/users 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '413', 'ETag': 'W/"19d-/Qm8rG0X9FyDmBalif7wgGZ6xKs"', 'Date': 'Thu, 17 Apr 2025 12:26:00 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=[{"user_id":1,"username":"admin","email":"admin@healthdiary.com","total_entries":3,"level":1,"experience":30,"current_streak":1,"highest_streak":1,"user_level":"admin","created_at":"2025-03-10T17:33:57.000Z"},{"user_id":2,"username":"testi","email":"testi@testi.com","total_entries":1,"level":1,"experience":10,"current_streak":1,"highest_streak":1,"user_level":"regular","created_at":"2025-03-10T17:33:57.000Z"}] 
+ </msg>
+<msg time="2025-04-17T15:26:00.947605" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=http://localhost:3000/api/admin/users</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2025-04-17T15:26:00.943086" elapsed="0.004519"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-04-17T15:26:00.948104" elapsed="0.000000"/>
+</kw>
+<kw name="Log List" owner="Collections">
+<msg time="2025-04-17T15:26:00.948605" level="INFO">List length is 2 and it contains following items:
+0: {'user_id': 1, 'username': 'admin', 'email': 'admin@healthdiary.com', 'total_entries': 3, 'level': 1, 'experience': 30, 'current_streak': 1, 'highest_streak': 1, 'user_level': 'admin', 'created_at': '2025-03-10T17:33:57.000Z'}
+1: {'user_id': 2, 'username': 'testi', 'email': 'testi@testi.com', 'total_entries': 1, 'level': 1, 'experience': 10, 'current_streak': 1, 'highest_streak': 1, 'user_level': 'regular', 'created_at': '2025-03-10T17:33:57.000Z'}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the length and contents of the ``list`` using given ``level``.</doc>
+<status status="PASS" start="2025-04-17T15:26:00.948104" elapsed="0.000501"/>
+</kw>
 <doc>Haetaan käyttäjän päiväkirjamerkinnät
 - Kirjaudutaan sisään ylläpitäjän oikeuksilla
-- Haetaan käyttäjän päiväkirjamerkinnät
+- Haetaan kaikki käyttäjät
 - Palautteena tuleva JSON-rakenne tulostetaan lokitiedostoon</doc>
-<status status="FAIL" start="2025-04-14T10:42:21.867595" elapsed="0.000370">Parent suite setup failed:
-HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:3000/api/auth/login</status>
+<status status="PASS" start="2025-04-17T15:26:00.942590" elapsed="0.006015"/>
 </test>
-<status status="FAIL" start="2025-04-14T10:42:21.774985" elapsed="0.093156">Suite setup failed:
-HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:3000/api/auth/login</status>
+<status status="PASS" start="2025-04-17T15:26:00.478569" elapsed="0.470533"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Case-9" id="s1" pass="0" fail="1" skip="0">Case-9</stat>
+<stat name="Case-9" id="s1" pass="1" fail="0" skip="0">Case-9</stat>
 </suite>
 </statistics>
 <errors>

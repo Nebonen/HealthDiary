@@ -245,3 +245,32 @@ Due to my filestructure, there is no need for a separate outputs/ -folder.
 I set up the GitHub.io page from my repository settings, under the 'pages' -section.
 
 Documentations are updated to include links to their respective log and report files.
+
+## Case 9. Test backend
+
+[case 9](../tests/backend/case9)
+
+The test authenticates as an admin user and then retrieves all users from the system via the admin API endpoint. It validates that the API responds with a successful status code and properly returns user data.
+
+1. Authentication
+
+- Logs in as admin using credentials (admin@healthdiary.com / admin123)
+- Extracts the authentication token from the response
+- Stores the token for subsequent API calls
+
+2. User retrieval
+
+- Makes a GET request to the admin users endpoint
+- Adds the authentication token to the request header
+- Verifies the response code is 200
+- Logs the returned user data
+
+![case9](../images/case9.png)
+
+[Case 9 logs](../tests/backend/case9/log.html)
+
+[Case 9 report](../tests/backend/case9/report.html)
+
+This documentation was created using Claude 3.7 Sonnet Thinking.
+Prompt: "Create a short README documentation for this test case _.robot file as context_".
+Output was altered.
