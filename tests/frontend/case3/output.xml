@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.1 on win32)" generated="2025-04-24T23:48:16.903350" rpa="false" schemaversion="5">
+<suite id="s1" name="Case-3" source="C:\Users\miska\HealthDiary\tests\frontend\case3\case-3.robot">
+<kw name="Open Browser To Form Page" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-04-24T23:48:17.078101" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\miska\\HealthDiary\\tests\\frontend\\case3\\browser\\traces\\temp\\a70789ab-6639-4f44-ba23-cb808888c240"}</msg>
+<msg time="2025-04-24T23:48:17.104631" level="INFO">Starting Browser process C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\index.js using port 51998</msg>
+<msg time="2025-04-24T23:48:17.104631" level="INFO">Node startup parameters: ['node', 'C:\\Users\\miska\\HealthDiary\\tests\\.venv\\Lib\\site-packages\\Browser\\wrapper\\index.js', '51998']</msg>
+<msg time="2025-04-24T23:48:18.388056" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\miska\\HealthDiary\\tests\\frontend\\case3\\browser\\traces\\temp\\a70789ab-6639-4f44-ba23-cb808888c240"}</msg>
+<arg>browser=${BROWSER}</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-04-24T23:48:17.077104" elapsed="1.311452"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-04-24T23:48:18.391057" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  }
+}</msg>
+<msg time="2025-04-24T23:48:18.412616" level="INFO">Successfully created context. </msg>
+<msg time="2025-04-24T23:48:18.412616" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'height': 720, 'width': 1280}}</msg>
+<arg>viewport={'width': 1280, 'height': 720}</arg>
+<arg>acceptDownloads=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-04-24T23:48:18.388556" elapsed="0.024060"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-04-24T23:48:19.450425" level="INFO">Successfully initialized new page object and opened url: https://www.selenium.dev/selenium/web/web-form.html</msg>
+<arg>${URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-04-24T23:48:18.413113" elapsed="1.037312"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-24T23:48:19.477466" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.450425" elapsed="0.027041"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:17.076603" elapsed="2.401364"/>
+</kw>
+<test id="s1-t1" name="Test Text Input Fields" line="12">
+<kw name="Fill Text Input Fields">
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-24T23:48:19.484490" level="INFO">Fills the text 'Robot Framework Test' in the given field.</msg>
+<arg>id=my-text-id</arg>
+<arg>Robot Framework Test</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.483993" elapsed="0.012508"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-24T23:48:19.497002" level="INFO">Fills the text 'This is a test message from Robot Framework.' in the given field.</msg>
+<arg>xpath=//textarea</arg>
+<arg>This is a test message from Robot Framework.</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.496501" elapsed="0.011514"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-24T23:48:19.509015" level="INFO">Fills the text 'password123' in the given field.</msg>
+<arg>xpath=//input[@name='my-password']</arg>
+<arg>password123</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.508015" elapsed="0.012008"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.483487" elapsed="0.036536"/>
+</kw>
+<kw name="Validate Text Input Fields">
+<kw name="Get Text" owner="Browser">
+<msg time="2025-04-24T23:48:19.539042" level="INFO">Text: 'Robot Framework Test'</msg>
+<arg>id=my-text-id</arg>
+<arg>==</arg>
+<arg>Robot Framework Test</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.520527" elapsed="0.018515"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2025-04-24T23:48:19.551064" level="INFO">Text: 'This is a test message from Robot Framework.'</msg>
+<arg>xpath=//textarea</arg>
+<arg>==</arg>
+<arg>This is a test message from Robot Framework.</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.539042" elapsed="0.012022"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.520023" elapsed="0.031539"/>
+</kw>
+<msg time="2025-04-24T23:48:19.554071" level="INFO">Set timeout to: 10000</msg>
+<status status="PASS" start="2025-04-24T23:48:19.477967" elapsed="0.073595"/>
+</test>
+<test id="s1-t2" name="Test Dropdown Fields" line="16">
+<kw name="Select Dropdown Options">
+<kw name="Select Options By" owner="Browser">
+<msg time="2025-04-24T23:48:19.561574" level="INFO">Selects the option(s) Three by attribute SelectAttribute.label from element xpath=//select[@name='my-select'].</msg>
+<arg>xpath=//select[@name='my-select']</arg>
+<arg>text</arg>
+<arg>Three</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Selects options from select element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.561574" elapsed="0.015531"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-04-24T23:48:19.577604" level="INFO">Clicks the element 'xpath=//input[@list='my-options']'.</msg>
+<arg>xpath=//input[@list='my-options']</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.577105" elapsed="0.045572"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.560572" elapsed="0.062105"/>
+</kw>
+<kw name="Validate Dropdown Selections">
+<kw name="Get Selected Options" owner="Browser">
+<msg time="2025-04-24T23:48:19.645725" level="INFO">entry {
+  value: "Open this select menu"
+  label: "Open this select menu"
+}
+entry {
+  value: "1"
+  label: "One"
+  index: 1
+}
+entry {
+  value: "2"
+  label: "Two"
+  index: 2
+}
+entry {
+  value: "3"
+  label: "Three"
+  index: 3
+  selected: true
+}
+</msg>
+<arg>xpath=//select[@name='my-select']</arg>
+<arg>text</arg>
+<arg>==</arg>
+<arg>Three</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the specified attribute of selected options of the ``select`` element.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.623677" elapsed="0.022048"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.622677" elapsed="0.023048"/>
+</kw>
+<msg time="2025-04-24T23:48:19.648226" level="INFO">Set timeout to: 10000</msg>
+<status status="PASS" start="2025-04-24T23:48:19.557075" elapsed="0.089150"/>
+</test>
+<test id="s1-t3" name="Test Checkbox And Radio Button" line="20">
+<kw name="Toggle Checkbox">
+<kw name="Check Checkbox" owner="Browser">
+<arg>id=my-check-1</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Checks the checkbox or selects radio button found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.655739" elapsed="0.010388"/>
+</kw>
+<kw name="Uncheck Checkbox" owner="Browser">
+<arg>id=my-check-2</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Unchecks the checkbox found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.666127" elapsed="0.011012"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.655240" elapsed="0.021899"/>
+</kw>
+<kw name="Select Radio Button">
+<kw name="Click" owner="Browser">
+<msg time="2025-04-24T23:48:19.678138" level="INFO">Clicks the element 'id=my-radio-2'.</msg>
+<arg>id=my-radio-2</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.677639" elapsed="0.029537"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.677639" elapsed="0.029537"/>
+</kw>
+<kw name="Validate Checkbox And Radio Button">
+<kw name="Get Checkbox State" owner="Browser">
+<msg time="2025-04-24T23:48:19.717688" level="INFO">Retrieved dom property for element id=my-check-1 containing true</msg>
+<msg time="2025-04-24T23:48:19.717688" level="INFO">Checkbox is checked</msg>
+<arg>id=my-check-1</arg>
+<arg>==</arg>
+<arg>checked</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the state of the checkbox found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.707674" elapsed="0.010514"/>
+</kw>
+<kw name="Get Checkbox State" owner="Browser">
+<msg time="2025-04-24T23:48:19.727709" level="INFO">Retrieved dom property for element id=my-check-2 containing false</msg>
+<msg time="2025-04-24T23:48:19.727709" level="INFO">Checkbox is unchecked</msg>
+<arg>id=my-check-2</arg>
+<arg>==</arg>
+<arg>unchecked</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the state of the checkbox found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.718188" elapsed="0.009521"/>
+</kw>
+<kw name="Get Element States" owner="Browser">
+<msg time="2025-04-24T23:48:19.745743" level="INFO">States are: ['attached', 'visible', 'enabled', 'editable', 'focused', 'checked']</msg>
+<msg time="2025-04-24T23:48:19.745743" level="INFO">${states} = ['attached', 'visible', 'enabled', 'editable', 'focused', 'checked']</msg>
+<var>${states}</var>
+<arg>id=my-radio-2</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Get the active states from the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.728208" elapsed="0.017535"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${states}</arg>
+<arg>checked</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.745743" elapsed="0.000501"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.707674" elapsed="0.038570"/>
+</kw>
+<msg time="2025-04-24T23:48:19.748243" level="INFO">Set timeout to: 10000</msg>
+<status status="PASS" start="2025-04-24T23:48:19.651225" elapsed="0.095518"/>
+</test>
+<test id="s1-t4" name="Test Form Submission" line="25">
+<kw name="Submit Form">
+<kw name="Click" owner="Browser">
+<msg time="2025-04-24T23:48:19.755255" level="INFO">Clicks the element 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.754756" elapsed="0.043914"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.754756" elapsed="0.044414"/>
+</kw>
+<kw name="Validate Form Submission">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-24T23:48:19.816207" level="INFO">Waited for Element with selector h1:text-is("Form submitted") at state visible</msg>
+<arg>h1:text-is("Form submitted")</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.799669" elapsed="0.016538"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2025-04-24T23:48:19.832222" level="INFO">Text: 'Received!'</msg>
+<arg>css=.lead</arg>
+<arg>contains</arg>
+<arg>Received!</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.816706" elapsed="0.015516"/>
+</kw>
+<status status="PASS" start="2025-04-24T23:48:19.799170" elapsed="0.033556"/>
+</kw>
+<msg time="2025-04-24T23:48:19.834227" level="INFO">Set timeout to: 10000</msg>
+<status status="PASS" start="2025-04-24T23:48:19.751244" elapsed="0.081482"/>
+</test>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2025-04-24T23:48:20.009468" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-24T23:48:19.837728" elapsed="0.171740"/>
+</kw>
+<doc>Test suite for Selenium Web Form demo page</doc>
+<status status="PASS" start="2025-04-24T23:48:16.904850" elapsed="3.104618"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Case-3" id="s1" pass="4" fail="0" skip="0">Case-3</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

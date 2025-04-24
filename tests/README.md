@@ -129,6 +129,56 @@ robot case-2.robot
 
 [Case 2 report](../tests/frontend/case2/report.html)
 
+## Case 3. Test different webforms
+
+[Case 3](../tests/frontend/case3/)
+
+This Robot Framework test suite validates the functionality of the Selenium web form demo page located at [https://www.selenium.dev/selenium/web/web-form.html](https://www.selenium.dev/selenium/web/web-form.html).
+
+It uses the `Browser` library to interact with a Chromium browser.
+
+### Test Cases:
+
+1.  **Test Text Input Fields:**
+    - Fills text, textarea, and password fields.
+    - Validates the content of the text and textarea fields.
+2.  **Test Dropdown Fields:**
+    - Selects an option from a dropdown menu by its visible text.
+    - Clicks an input associated with a datalist.
+    - Validates the selected option in the dropdown.
+3.  **Test Checkbox And Radio Button:**
+    - Checks one checkbox and unchecks another.
+    - Selects a specific radio button.
+    - Validates the state (checked/unchecked) of the checkboxes and the selected radio button.
+4.  **Test Form Submission:**
+    - Clicks the form's submit button.
+    - Waits for the submission confirmation heading ("Form submitted") to become visible.
+    - Validates that the confirmation message contains "Received!".
+
+### Keywords:
+
+The test utilizes keywords to structure the actions:
+
+- `Open Browser To Form Page`: Sets up the browser and navigates to the URL before tests run.
+- `Fill Text Input Fields`: Enters text into input fields.
+- `Validate Text Input Fields`: Checks the content of text fields.
+- `Select Dropdown Options`: Selects options from dropdowns/datalists.
+- `Validate Dropdown Selections`: Verifies the selected dropdown option.
+- `Toggle Checkbox`: Changes the state of checkboxes.
+- `Select Radio Button`: Selects a radio button.
+- `Validate Checkbox And Radio Button`: Checks the state of checkboxes and radio buttons.
+- `Submit Form`: Clicks the submit button.
+- `Validate Form Submission`: Verifies the result page after submission.
+- `Close Browser`: Closes the browser after all tests are completed.
+
+![Case3](../images/case3.png)
+
+[Case 3 logs](../tests/frontend/case3/log.html)
+
+[Case 3 report](../tests/frontend/case3/report.html)
+
+This documentation and code (mostly) was created using Gemini 2.5 pro. Code was altered.
+
 ## Case 4. Make a new diary entry
 
 [Case 4](../tests/frontend/case4/)

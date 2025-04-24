@@ -1,0 +1,119 @@
+{"level":30,"time":"2025-04-24T20:48:17.710Z","pid":14180,"hostname":"Nebonen","msg":"Listening on 51998"}
+(node:14180) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-04-24T20:48:18.190Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-04-24T20:48:18.385Z","pid":14180,"hostname":"Nebonen","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-04-24T20:48:18.386Z","pid":14180,"hostname":"Nebonen","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-04-24T20:48:18.386Z","pid":14180,"hostname":"Nebonen","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-04-24T20:48:18.394Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method newContext"}
+{"level":30,"time":"2025-04-24T20:48:18.394Z","pid":14180,"hostname":"Nebonen","msg":"Creating new context with options: {\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"height\":720,\"width\":1280}}"}
+{"level":30,"time":"2025-04-24T20:48:18.395Z","pid":14180,"hostname":"Nebonen","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-04-24T20:48:18.395Z","pid":14180,"hostname":"Nebonen","msg":"Trace file: "}
+{"level":30,"time":"2025-04-24T20:48:18.410Z","pid":14180,"hostname":"Nebonen","msg":"Changed active context"}
+{"level":30,"time":"2025-04-24T20:48:18.410Z","pid":14180,"hostname":"Nebonen","msg":"End of node method newContext"}
+{"level":30,"time":"2025-04-24T20:48:18.415Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-04-24T20:48:18.415Z","pid":14180,"hostname":"Nebonen","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-04-24T20:48:18.564Z","pid":14180,"hostname":"Nebonen","msg":"Video path: undefined"}
+{"level":30,"time":"2025-04-24T20:48:18.564Z","pid":14180,"hostname":"Nebonen","msg":"Changed active page"}
+{"level":30,"time":"2025-04-24T20:48:19.449Z","pid":14180,"hostname":"Nebonen","msg":"End of node method newPage"}
+{"level":30,"time":"2025-04-24T20:48:19.453Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-24T20:48:19.453Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with h1 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.476Z","pid":14180,"hostname":"Nebonen","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-24T20:48:19.479Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.482Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.485Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-24T20:48:19.486Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-text-id in page."}
+{"level":30,"time":"2025-04-24T20:48:19.495Z","pid":14180,"hostname":"Nebonen","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-24T20:48:19.498Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-24T20:48:19.498Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//textarea in page."}
+{"level":30,"time":"2025-04-24T20:48:19.507Z","pid":14180,"hostname":"Nebonen","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-24T20:48:19.510Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-24T20:48:19.510Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//input[@name='my-password'] in page."}
+{"level":30,"time":"2025-04-24T20:48:19.518Z","pid":14180,"hostname":"Nebonen","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-24T20:48:19.522Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getText"}
+{"level":30,"time":"2025-04-24T20:48:19.522Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-text-id in page."}
+{"level":30,"time":"2025-04-24T20:48:19.538Z","pid":14180,"hostname":"Nebonen","msg":"Retrieved text for element id=my-text-id containing Robot Framework Test"}
+{"level":30,"time":"2025-04-24T20:48:19.538Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getText"}
+{"level":30,"time":"2025-04-24T20:48:19.540Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getText"}
+{"level":30,"time":"2025-04-24T20:48:19.540Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//textarea in page."}
+{"level":30,"time":"2025-04-24T20:48:19.549Z","pid":14180,"hostname":"Nebonen","msg":"Retrieved text for element xpath=//textarea containing This is a test message from Robot Framework."}
+{"level":30,"time":"2025-04-24T20:48:19.549Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getText"}
+{"level":30,"time":"2025-04-24T20:48:19.555Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.556Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.558Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.560Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.563Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method selectOption"}
+{"level":30,"time":"2025-04-24T20:48:19.564Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//select[@name='my-select'] in page."}
+{"level":30,"time":"2025-04-24T20:48:19.575Z","pid":14180,"hostname":"Nebonen","msg":"Option entries: 4"}
+{"level":30,"time":"2025-04-24T20:48:19.576Z","pid":14180,"hostname":"Nebonen","msg":"End of node method selectOption"}
+{"level":30,"time":"2025-04-24T20:48:19.576Z","pid":14180,"hostname":"Nebonen","msg":"Selected entries: 1"}
+{"level":30,"time":"2025-04-24T20:48:19.579Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method click"}
+{"level":30,"time":"2025-04-24T20:48:19.579Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//input[@list='my-options'] in page."}
+{"level":30,"time":"2025-04-24T20:48:19.621Z","pid":14180,"hostname":"Nebonen","msg":"End of node method click"}
+{"level":30,"time":"2025-04-24T20:48:19.625Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getSelectContent"}
+{"level":30,"time":"2025-04-24T20:48:19.625Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//select[@name='my-select'] in page."}
+{"level":30,"time":"2025-04-24T20:48:19.644Z","pid":14180,"hostname":"Nebonen","msg":"Option entries: 4"}
+{"level":30,"time":"2025-04-24T20:48:19.645Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getSelectContent"}
+{"level":30,"time":"2025-04-24T20:48:19.645Z","pid":14180,"hostname":"Nebonen","msg":"Selected entries: 1"}
+{"level":30,"time":"2025-04-24T20:48:19.649Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.650Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.653Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.654Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.657Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method checkCheckbox"}
+{"level":30,"time":"2025-04-24T20:48:19.657Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-check-1 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.665Z","pid":14180,"hostname":"Nebonen","msg":"End of node method checkCheckbox"}
+{"level":30,"time":"2025-04-24T20:48:19.668Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method uncheckCheckbox"}
+{"level":30,"time":"2025-04-24T20:48:19.668Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-check-2 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.676Z","pid":14180,"hostname":"Nebonen","msg":"End of node method uncheckCheckbox"}
+{"level":30,"time":"2025-04-24T20:48:19.679Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method click"}
+{"level":30,"time":"2025-04-24T20:48:19.679Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-radio-2 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.706Z","pid":14180,"hostname":"Nebonen","msg":"End of node method click"}
+{"level":30,"time":"2025-04-24T20:48:19.709Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBoolProperty"}
+{"level":30,"time":"2025-04-24T20:48:19.709Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-check-1 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.716Z","pid":14180,"hostname":"Nebonen","msg":"Retrieved dom property for element id=my-check-1 containing true"}
+{"level":30,"time":"2025-04-24T20:48:19.716Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBoolProperty"}
+{"level":30,"time":"2025-04-24T20:48:19.719Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBoolProperty"}
+{"level":30,"time":"2025-04-24T20:48:19.720Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-check-2 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.727Z","pid":14180,"hostname":"Nebonen","msg":"Retrieved dom property for element id=my-check-2 containing false"}
+{"level":30,"time":"2025-04-24T20:48:19.727Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBoolProperty"}
+{"level":30,"time":"2025-04-24T20:48:19.729Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-04-24T20:48:19.729Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with id=my-radio-2 in page."}
+{"level":30,"time":"2025-04-24T20:48:19.738Z","pid":14180,"hostname":"Nebonen","msg":"Element id=my-radio-2 is editable: true"}
+{"level":30,"time":"2025-04-24T20:48:19.738Z","pid":14180,"hostname":"Nebonen","msg":"Checking checked state"}
+{"level":30,"time":"2025-04-24T20:48:19.745Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-04-24T20:48:19.749Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.750Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.752Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.754Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.756Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method click"}
+{"level":30,"time":"2025-04-24T20:48:19.756Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with xpath=//button[@type='submit'] in page."}
+{"level":30,"time":"2025-04-24T20:48:19.798Z","pid":14180,"hostname":"Nebonen","msg":"End of node method click"}
+{"level":30,"time":"2025-04-24T20:48:19.802Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-24T20:48:19.802Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with h1:text-is(\"Form submitted\") in page."}
+{"level":30,"time":"2025-04-24T20:48:19.815Z","pid":14180,"hostname":"Nebonen","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-24T20:48:19.818Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getText"}
+{"level":30,"time":"2025-04-24T20:48:19.818Z","pid":14180,"hostname":"Nebonen","msg":"Strict mode is enabled, find Locator with css=.lead in page."}
+{"level":30,"time":"2025-04-24T20:48:19.831Z","pid":14180,"hostname":"Nebonen","msg":"Retrieved text for element css=.lead containing Received!"}
+{"level":30,"time":"2025-04-24T20:48:19.831Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getText"}
+{"level":30,"time":"2025-04-24T20:48:19.835Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.836Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:19.839Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2025-04-24T20:48:19.853Z","pid":14180,"hostname":"Nebonen","msg":"Removed page=31472f3c-282c-4216-8cf7-8b9188843d65 from context=c725772a-7314-4080-a271-82bbe1cdaac6 page stack"}
+{"level":30,"time":"2025-04-24T20:48:20.008Z","pid":14180,"hostname":"Nebonen","msg":"End of node method closeBrowser"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\index.js:12223:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\index.js:13119:59)
+    at PlaywrightServer.setTimeout (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\index.js:13367:57)
+    at Object.onReceiveHalfClose (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\miska\HealthDiary\tests\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:536:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-04-24T20:48:20.032Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:20.032Z","pid":14180,"hostname":"Nebonen","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-24T20:48:20.074Z","pid":14180,"hostname":"Nebonen","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2025-04-24T20:48:20.074Z","pid":14180,"hostname":"Nebonen","msg":"End of node method closeAllBrowsers"}
